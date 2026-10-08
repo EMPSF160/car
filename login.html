@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - VELOCITY BLACK</title>
+    <title>Sign In - WHEELS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
     <style>
         body {
             padding-top: 0;
-            background: var(--primary);
+            background: radial-gradient(circle at 50% 30%, rgba(37, 99, 235, 0.12) 0%, var(--primary) 70%);
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -18,277 +18,116 @@
             padding: 2rem;
         }
         
-        .login-container {
-            max-width: 500px;
+        .login-card {
+            max-width: 480px;
             width: 100%;
             background: var(--subtle);
-            border: 2px solid var(--extra);
-            padding: 3rem;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
-            box-shadow: 0 10px 50px rgba(220, 20, 60, 0.3);
-        }
-        
-        .login-logo {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .login-logo a {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--accent);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 20px rgba(192, 192, 192, 0.8);
-            transition: all 0.3s ease;
-            display: inline-block;
-        }
-        
-        .login-logo a:hover {
-            color: var(--secondary);
-            text-shadow: 0 0 30px rgba(220, 20, 60, 1);
-            transform: scale(1.05);
-        }
-        
-        .login-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-        
-        .login-header h1 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-            color: var(--text);
-        }
-        
-        .login-header p {
-            color: var(--accent);
-            font-size: 1rem;
-        }
-        
-        .login-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .form-group label {
-            font-family: var(--font-accent);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-        }
-        
-        .form-group input {
-            padding: 12px;
-            background: var(--primary);
             border: 1px solid var(--extra);
-            color: var(--text);
-            font-family: var(--font-body);
-            transition: all 0.3s ease;
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
         }
-        
-        .form-group input:hover {
-            border-color: var(--accent);
-            background: var(--extra);
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
-        }
-        
-        .form-options {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 0.9rem;
-        }
-        
-        .form-options label {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent);
-            cursor: pointer;
-        }
-        
-        .form-options input[type="checkbox"] {
-            width: auto;
-            cursor: pointer;
-        }
-        
-        .form-options a {
-            color: var(--secondary);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .form-options a:hover {
-            color: var(--highlight);
-            text-decoration: underline;
-        }
-        
-        .login-form .btn {
-            width: 100%;
-            padding: 14px;
-            font-size: 1rem;
-            margin-top: 1rem;
-        }
-        
-        .divider {
-            text-align: center;
-            margin: 2rem 0;
-            position: relative;
-        }
-        
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: var(--extra);
-        }
-        
-        .divider span {
-            background: var(--subtle);
-            padding: 0 1rem;
-            color: var(--accent);
-            position: relative;
-        }
-        
-        .social-login {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .social-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            padding: 12px;
+
+        .quick-demo-box {
             background: var(--primary);
-            border: 1px solid var(--extra);
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .social-btn:hover {
-            border-color: var(--secondary);
-            background: var(--extra);
-        }
-        
-        .register-link {
+            border: 1px dashed var(--secondary);
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid var(--extra);
         }
-        
-        .register-link p {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-        
-        .register-link a {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        
-        .register-link a:hover {
-            color: var(--highlight);
-            text-decoration: underline;
-        }
-        
-        @media (max-width: 768px) {
-            .login-container {
-                padding: 2rem 1.5rem;
-            }
-            
-            .login-logo a {
-                font-size: 1.5rem;
-            }
-            
-            .login-header h1 {
-                font-size: 1.5rem;
-            }
+
+        .quick-demo-btn {
+            padding: 6px 14px;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 4px;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-logo">
-            <a href="index.html">VELOCITY BLACK</a>
+    <div class="login-card">
+        <div style="text-align: center; margin-bottom: 1.5rem;">
+            <a href="index.html" class="logo" style="font-size: 1.6rem; text-decoration: none; color: #fff; display: inline-block; margin-bottom: 0.5rem;">WHEELS</a>
+            <h1 style="font-size: 1.5rem; margin: 0 0 4px;">Sign In to Your Account</h1>
+            <p style="color: var(--accent); font-size: 0.85rem; margin: 0;">Access vehicle orders, test drives, and dealership controls.</p>
         </div>
-        
-        <div class="login-header">
-            <h1>Welcome Back</h1>
-            <p>Sign in to your account to continue</p>
+
+        <!-- 1-Click Demo Login Shortcuts -->
+        <div class="quick-demo-box">
+            <span style="font-size: 0.75rem; color: var(--accent); text-transform: uppercase; font-family: var(--font-accent); letter-spacing: 0.5px; display: block; margin-bottom: 6px;">
+                ⚡ Fast 1-Click Demo Accounts:
+            </span>
+            <div style="display: flex; justify-content: center; gap: 0.5rem;">
+                <button type="button" class="btn quick-demo-btn" id="demo-admin-btn">
+                    <i class="fas fa-user-shield"></i> Dealership Admin
+                </button>
+                <button type="button" class="btn btn-secondary quick-demo-btn" id="demo-cust-btn">
+                    <i class="fas fa-user"></i> VIP Buyer
+                </button>
+            </div>
         </div>
-        
-        <form class="login-form" action="#" method="POST">
+
+        <form id="login-form" style="display: flex; flex-direction: column; gap: 1.2rem;">
             <div class="form-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-family: var(--font-accent); margin-bottom: 4px; text-align: left; display: block;">Email Address</label>
+                <input type="email" id="login-email" required placeholder="admin@wheels.com or buyer@domain.com" style="width: 100%; padding: 12px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
             </div>
-            
+
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                <label style="font-size: 0.8rem; color: var(--accent); text-transform: uppercase; font-family: var(--font-accent); margin-bottom: 4px; text-align: left; display: block;">Password</label>
+                <input type="password" id="login-password" required placeholder="••••••••" value="demo1234" style="width: 100%; padding: 12px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
             </div>
-            
-            <div class="form-options">
-                <label>
-                    <input type="checkbox" name="remember">
-                    Remember me
-                </label>
-                <a href="#">Forgot Password?</a>
-            </div>
-            
-            <button type="submit" class="btn">Sign In</button>
+
+            <button type="submit" class="btn" style="width: 100%; padding: 12px; font-size: 1rem; margin-top: 0.5rem;">
+                <i class="fas fa-sign-in-alt"></i> Sign In
+            </button>
         </form>
-        
-        <div class="divider">
-            <span>OR</span>
+
+        <div style="text-align: center; margin-top: 1.5rem; font-size: 0.85rem; color: var(--accent);">
+            Don't have an account? <a href="register.html" style="color: var(--secondary); font-weight: 700; text-decoration: none;">Create an Account</a>
         </div>
-        
-        <div class="social-login">
-            <a href="#" class="social-btn">
-                <i class="fab fa-google"></i>
-                Continue with Google
-            </a>
-            <a href="#" class="social-btn">
-                <i class="fab fa-facebook-f"></i>
-                Continue with Facebook
-            </a>
-        </div>
-        
-        <div class="register-link">
-            <p>Don't have an account?</p>
-            <a href="register.html">Create an account</a>
+        <div style="text-align: center; margin-top: 0.8rem;">
+            <a href="index.html" style="color: var(--accent); font-size: 0.8rem; text-decoration: none;"><i class="fas fa-arrow-left"></i> Return to Showroom</a>
         </div>
     </div>
 
+    <!-- SCRIPTS -->
+    <script src="js/car-db.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('login-form');
+            const emailInput = document.getElementById('login-email');
+            const passwordInput = document.getElementById('login-password');
+
+            document.getElementById('demo-admin-btn').addEventListener('click', () => {
+                emailInput.value = 'admin@wheels.com';
+                passwordInput.value = 'admin123';
+                window.authManager.loginAsDemo('admin');
+                showToast('Signed in as Dealership Admin (Alex Vance)', 'success');
+                setTimeout(() => window.location.href = 'dashboard.html', 600);
+            });
+
+            document.getElementById('demo-cust-btn').addEventListener('click', () => {
+                emailInput.value = 'customer@wheels.com';
+                passwordInput.value = 'cust123';
+                window.authManager.loginAsDemo('customer');
+                showToast('Signed in as VIP Buyer (Marcus Sterling)', 'success');
+                setTimeout(() => window.location.href = 'dashboard.html', 600);
+            });
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const user = window.authManager.login(emailInput.value, passwordInput.value);
+                showToast(`Welcome back, ${user.name}!`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 600);
+            });
+        });
+    </script>
 </body>
 </html>
-
-
-

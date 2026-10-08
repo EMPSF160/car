@@ -1,1 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Details & Configurator - WHEELS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+    <style>
+        .details-hero {
+            padding: 120px 0 40px;
+            background: radial-gradient(circle at 50% 20%, rgba(37, 99, 235, 0.1) 0%, var(--primary) 70%);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            font-family: var(--font-accent);
+            letter-spacing: 1px;
+        }
+
+        .breadcrumb a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--secondary);
+        }
+
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2.5rem;
+            align-items: start;
+        }
+
+        /* Vehicle Visualizer */
+        .visualizer-card {
+            background: var(--subtle);
+            border: 1px solid var(--extra);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-vehicle-viewer {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #09090b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-vehicle-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+
+        .viewer-badges {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .color-preview-badge {
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-family: var(--font-accent);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .color-dot-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .angle-switcher-bar {
+            display: flex;
+            gap: 0.8rem;
+            margin-top: 1rem;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .angle-btn {
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            color: var(--text);
+            padding: 8px 14px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .angle-btn.active, .angle-btn:hover {
+            border-color: var(--secondary);
+            background: rgba(220, 20, 60, 0.15);
+            color: #fff;
+        }
+
+        /* Color Customizer */
+        .color-palette-box {
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            border-radius: 12px;
+        }
+
+        .palette-title {
+            font-size: 0.85rem;
+            font-family: var(--font-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+
+        .color-swatches {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .color-swatch-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 2px solid var(--extra);
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .color-swatch-btn.active {
+            transform: scale(1.15);
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(255,255,255,0.4);
+        }
+
+        /* Quick Specs Pill Row */
+        .quick-specs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .spec-pill {
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            padding: 1rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .spec-pill .spec-label {
+            font-size: 0.75rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-family: var(--font-accent);
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .spec-pill .spec-value {
+            font-family: var(--font-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Right Side: Pricing & Configurator Card */
+        .config-card {
+            background: var(--subtle);
+            border: 1px solid var(--extra);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 100px;
+        }
+
+        .car-main-title {
+            text-align: left;
+            margin-bottom: 0.4rem;
+            font-size: 1.8rem;
+        }
+
+        .car-main-tagline {
+            text-align: left;
+            color: var(--accent);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .price-display-box {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--extra);
+            margin-bottom: 1.5rem;
+        }
+
+        .live-msrp {
+            font-family: var(--font-heading);
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--secondary);
+        }
+
+        .live-lease-est {
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        /* Trims */
+        .section-subheading {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            font-family: var(--font-accent);
+            letter-spacing: 1px;
+            color: var(--accent);
+            text-align: left;
+            margin-bottom: 0.8rem;
+        }
+
+        .trim-option-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .trim-option-card {
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            padding: 1rem;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .trim-option-card:hover, .trim-option-card.active {
+            border-color: var(--secondary);
+            background: rgba(220, 20, 60, 0.08);
+        }
+
+        .trim-left {
+            text-align: left;
+        }
+
+        .trim-left strong {
+            font-size: 0.95rem;
+            color: #fff;
+            display: block;
+        }
+
+        .trim-left small {
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        .trim-price-offset {
+            font-family: var(--font-accent);
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: var(--highlight);
+        }
+
+        /* CTA Buttons */
+        .config-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.5rem;
+        }
+
+        .config-actions .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        /* Financing Calculator Box */
+        .finance-calc-section {
+            padding: 60px 0;
+            background: var(--primary);
+        }
+
+        .calc-wrapper {
+            background: var(--subtle);
+            border: 1px solid var(--extra);
+            border-radius: 16px;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 2.5rem;
+        }
+
+        .calc-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .calc-slider-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-family: var(--font-accent);
+        }
+
+        .calc-slider-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--secondary);
+            height: 6px;
+            background: var(--extra);
+            border-radius: 3px;
+        }
+
+        .term-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 0.4rem;
+        }
+
+        .term-btn {
+            flex: 1;
+            padding: 8px;
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            color: var(--text);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .term-btn.active {
+            background: var(--secondary);
+            border-color: var(--secondary);
+        }
+
+        .calc-result-box {
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .result-monthly-est {
+            font-family: var(--font-heading);
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #2ed573;
+            margin: 0.5rem 0;
+        }
+
+        .result-sub {
+            font-size: 0.85rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 992px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+            .quick-specs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .calc-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="index.html" class="logo">WHEELS</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fleet.html" class="active">New Inventory</a></li>
+                <li><a href="services.html">Services & Financing</a></li>
+                <li><a href="locations.html">Showrooms</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-icons">
+                <!-- Injected via auth.js / main.js -->
+            </div>
+            <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
+        </div>
+    </nav>
+
+    <!-- VEHICLE DETAILS HERO -->
+    <section class="details-hero">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+            <!-- Breadcrumbs -->
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <i class="fas fa-chevron-right" style="font-size: 0.65rem;"></i>
+                <a href="fleet.html">New Vehicles</a>
+                <i class="fas fa-chevron-right" style="font-size: 0.65rem;"></i>
+                <span id="breadcrumb-car-name" style="color: var(--text);">Porsche Taycan Turbo GT</span>
+            </div>
+
+            <!-- Details Grid -->
+            <div class="details-grid">
+                <!-- Left Column: Visualizer & Specs -->
+                <div>
+                    <div class="visualizer-card">
+                        <div class="main-vehicle-viewer">
+                            <img id="viewer-img" src="" alt="Vehicle Preview" class="main-vehicle-img">
+                            <div class="viewer-badges">
+                                <span class="badge-tag" id="vehicle-status-badge">IN STOCK</span>
+                                <div class="color-preview-badge">
+                                    <span class="color-dot-indicator" id="color-dot" style="background: #0055ff;"></span>
+                                    <span id="color-name-label">Volt Blue Metallic</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Multi-Angle Switcher -->
+                        <div class="angle-switcher-bar">
+                            <button class="angle-btn active" data-angle="0"><i class="fas fa-camera"></i> Front 3/4 View</button>
+                            <button class="angle-btn" data-angle="1"><i class="fas fa-arrows-alt-h"></i> Side Profile</button>
+                            <button class="angle-btn" data-angle="2"><i class="fas fa-tachometer-alt"></i> Dynamic Cockpit</button>
+                        </div>
+
+                        <!-- Color Customizer -->
+                        <div class="color-palette-box">
+                            <div class="palette-title">Select Exterior Paint Finish</div>
+                            <div class="color-swatches" id="color-swatches-container">
+                                <!-- Injected via JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Quick Specs Row -->
+                    <div class="quick-specs-grid">
+                        <div class="spec-pill">
+                            <div class="spec-label">0 - 60 MPH</div>
+                            <div class="spec-value" id="spec-0-60" style="color: var(--highlight);">2.1s</div>
+                        </div>
+                        <div class="spec-pill">
+                            <div class="spec-label">HORSEPOWER</div>
+                            <div class="spec-value" id="spec-hp">1,019 HP</div>
+                        </div>
+                        <div class="spec-pill">
+                            <div class="spec-label">TOP SPEED</div>
+                            <div class="spec-value" id="spec-top-speed">190 MPH</div>
+                        </div>
+                        <div class="spec-pill">
+                            <div class="spec-label">EST. RANGE / MPG</div>
+                            <div class="spec-value" id="spec-range">340 MI</div>
+                        </div>
+                    </div>
+
+                    <!-- Overview & Feature Tabs -->
+                    <div style="margin-top: 2.5rem; background: var(--subtle); border: 1px solid var(--extra); border-radius: 16px; padding: 2rem;">
+                        <h3 style="text-align: left; font-size: 1.3rem; margin-bottom: 1rem;"><i class="fas fa-shield-alt" style="color: var(--secondary);"></i> Vehicle Overview & Features</h3>
+                        <p id="car-overview-text" style="text-align: left; color: var(--accent); line-height: 1.8; margin-bottom: 1.5rem;"></p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; border-top: 1px solid var(--extra); padding-top: 1.5rem;">
+                            <div>
+                                <small style="color: var(--accent); text-transform: uppercase; font-family: var(--font-accent);">Engine / Powertrain</small>
+                                <strong id="spec-engine" style="display: block; font-size: 0.95rem; margin-top: 4px;"></strong>
+                            </div>
+                            <div>
+                                <small style="color: var(--accent); text-transform: uppercase; font-family: var(--font-accent);">Transmission</small>
+                                <strong id="spec-transmission" style="display: block; font-size: 0.95rem; margin-top: 4px;"></strong>
+                            </div>
+                            <div>
+                                <small style="color: var(--accent); text-transform: uppercase; font-family: var(--font-accent);">Drivetrain</small>
+                                <strong id="spec-drivetrain" style="display: block; font-size: 0.95rem; margin-top: 4px;"></strong>
+                            </div>
+                            <div>
+                                <small style="color: var(--accent); text-transform: uppercase; font-family: var(--font-accent);">Manufacturer Warranty</small>
+                                <strong id="spec-warranty" style="display: block; font-size: 0.95rem; margin-top: 4px;"></strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Configurator & Ordering -->
+                <div>
+                    <div class="config-card">
+                        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div>
+                                <h1 class="car-main-title" id="car-title">Porsche Taycan Turbo GT</h1>
+                                <p class="car-main-tagline" id="car-tagline">The Pinnacle of Electric Track Dominance</p>
+                            </div>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <button class="card-icon-btn" id="btn-save-wishlist" title="Save to Wishlist"><i class="far fa-heart"></i></button>
+                                <button class="card-icon-btn" id="btn-toggle-compare" title="Add to Compare"><i class="fas fa-columns"></i></button>
+                            </div>
+                        </div>
+
+                        <!-- Live Price Display -->
+                        <div class="price-display-box">
+                            <div>
+                                <small style="color: var(--accent); text-transform: uppercase; font-family: var(--font-accent); letter-spacing: 0.5px;">Starting MSRP</small>
+                                <div class="live-msrp" id="live-msrp-display">$230,000</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <span class="badge-stock" id="stock-units-badge">4 Units Available</span>
+                                <div class="live-lease-est" id="live-est-payment">Est. $2,840 / mo</div>
+                            </div>
+                        </div>
+
+                        <!-- Trim Selection -->
+                        <div class="section-subheading">Select Configuration / Trim</div>
+                        <div class="trim-option-list" id="trim-list-container">
+                            <!-- Injected via JS -->
+                        </div>
+
+                        <!-- Quick Workflow Actions -->
+                        <div class="config-actions">
+                            <button type="button" class="btn" id="btn-open-reserve-modal">
+                                <i class="fas fa-bolt"></i> Reserve Vehicle Online ($1,000 Deposit)
+                            </button>
+                            <button type="button" class="btn btn-secondary" id="btn-open-testdrive-modal">
+                                <i class="fas fa-calendar-check"></i> Schedule VIP Test Drive
+                            </button>
+                            <button type="button" class="btn" style="background: transparent; border: 1px solid var(--extra); color: var(--text);" id="btn-scroll-to-calc">
+                                <i class="fas fa-calculator"></i> Customize Loan & Lease Options
+                            </button>
+                        </div>
+
+                        <!-- Trust Guarantee -->
+                        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--extra); font-size: 0.8rem; color: var(--accent); display: flex; flex-direction: column; gap: 0.4rem;">
+                            <div><i class="fas fa-check" style="color: #2ed573;"></i> 100% Refundable Token Deposit</div>
+                            <div><i class="fas fa-check" style="color: #2ed573;"></i> Transparent MSRP with No Dealer Markups</div>
+                            <div><i class="fas fa-check" style="color: #2ed573;"></i> Complimentary White-Glove Home Delivery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE FINANCING & LEASE CALCULATOR -->
+    <section class="finance-calc-section" id="finance-section">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+            <h2 style="margin-bottom: 0.5rem;"><i class="fas fa-coins" style="color: var(--secondary);"></i> Financing & Payment Estimator</h2>
+            <p style="color: var(--accent); margin-bottom: 2.5rem;">Tailor your monthly payments with flexible term lengths and competitive interest rates.</p>
+
+            <div class="calc-wrapper">
+                <div class="calc-controls">
+                    <!-- Down Payment -->
+                    <div class="calc-slider-group">
+                        <label>
+                            <span>Down Payment</span>
+                            <strong id="down-payment-val" style="color: #fff;">$46,000 (20%)</strong>
+                        </label>
+                        <input type="range" id="down-payment-slider" min="5" max="60" value="20" step="5">
+                    </div>
+
+                    <!-- Loan Term -->
+                    <div>
+                        <label style="display: block; font-size: 0.9rem; color: var(--accent); margin-bottom: 0.5rem; font-family: var(--font-accent); text-align: left;">Loan Term (Months)</label>
+                        <div class="term-buttons">
+                            <button class="term-btn" data-term="36">36 Mos</button>
+                            <button class="term-btn" data-term="48">48 Mos</button>
+                            <button class="term-btn active" data-term="60">60 Mos</button>
+                            <button class="term-btn" data-term="72">72 Mos</button>
+                        </div>
+                    </div>
+
+                    <!-- Interest Rate -->
+                    <div class="calc-slider-group">
+                        <label>
+                            <span>Estimated Interest Rate (APR)</span>
+                            <strong id="apr-val" style="color: #fff;">4.9% APR</strong>
+                        </label>
+                        <input type="range" id="apr-slider" min="1.9" max="10.9" value="4.9" step="0.1">
+                    </div>
+
+                    <!-- Trade-In Credit -->
+                    <div class="calc-slider-group">
+                        <label>
+                            <span>Trade-in Vehicle Credit</span>
+                            <strong id="tradein-val" style="color: #fff;">$0</strong>
+                        </label>
+                        <input type="range" id="tradein-slider" min="0" max="60000" value="0" step="2500">
+                    </div>
+                </div>
+
+                <!-- Result Box -->
+                <div class="calc-result-box">
+                    <span style="font-size: 0.9rem; text-transform: uppercase; font-family: var(--font-accent); color: var(--accent); letter-spacing: 1px;">Estimated Monthly Payment</span>
+                    <div class="result-monthly-est" id="calc-monthly-total">$3,462 / mo</div>
+                    <div class="result-sub" id="calc-breakdown-sub">Based on $184,000 Total Loan Amount over 60 Months</div>
+                    
+                    <button class="btn" style="width: 100%;" onclick="showToast('Pre-approval application opened with current loan configuration.', 'success')">
+                        <i class="fas fa-file-signature"></i> Apply for 1-Click Pre-Approval
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TEST DRIVE BOOKING MODAL -->
+    <div class="modal-backdrop" id="modal-test-drive">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-alt" style="color: var(--secondary);"></i> Schedule VIP Test Drive</h3>
+                <button class="modal-close-btn" onclick="document.getElementById('modal-test-drive').classList.remove('active')">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="test-drive-form">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Vehicle</label>
+                        <input type="text" id="td-car-name" readonly style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Full Name</label>
+                            <input type="text" id="td-name" required placeholder="John Doe" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Phone Number</label>
+                            <input type="tel" id="td-phone" required placeholder="+1 (555) 000-0000" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Email Address</label>
+                        <input type="email" id="td-email" required placeholder="you@domain.com" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Preferred Showroom / Experience</label>
+                        <select id="td-showroom" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <option value="Wheels Downtown Flagship Showroom">Wheels Downtown Flagship Showroom</option>
+                            <option value="Wheels West Coast Supercenter">Wheels West Coast Supercenter</option>
+                            <option value="Home / Office Concierge Test Drive">Home / Office Concierge Test Drive</option>
+                        </select>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Date</label>
+                            <input type="date" id="td-date" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Time Slot</label>
+                            <select id="td-time" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="11:30 AM">11:30 AM</option>
+                                <option value="02:00 PM">02:00 PM</option>
+                                <option value="04:30 PM">04:30 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-check-circle"></i> Confirm VIP Test Drive Appointment
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONLINE TOKEN RESERVATION MODAL -->
+    <div class="modal-backdrop" id="modal-reserve">
+        <div class="modal-card">
+            <div class="modal-header">
+                <div>
+                    <h3 style="margin: 0;"><i class="fas fa-shopping-cart" style="color: var(--secondary);"></i> Vehicle Reservation & Token Deposit</h3>
+                    <small style="color: var(--accent);">Official Factory Allocation Slip</small>
+                </div>
+                <button class="modal-close-btn" onclick="document.getElementById('modal-reserve').classList.remove('active')">✕</button>
+            </div>
+            <div class="modal-body">
+                <div style="background: var(--primary); border: 1px solid var(--extra); border-radius: 10px; padding: 1.2rem; margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span id="res-summary-car" style="font-weight: 700;">Porsche Taycan Turbo GT</span>
+                        <strong id="res-summary-total" style="color: var(--secondary); font-family: var(--font-heading);">$230,000</strong>
+                    </div>
+                    <div style="font-size: 0.85rem; color: var(--accent); display: flex; flex-direction: column; gap: 4px;">
+                        <div>Trim: <span id="res-summary-trim" style="color: #fff;">Weissach Track Pack</span></div>
+                        <div>Color: <span id="res-summary-color" style="color: #fff;">Volt Blue Metallic</span></div>
+                        <div>Refundable Deposit Today: <strong style="color: #2ed573;">$1,000.00</strong></div>
+                    </div>
+                </div>
+
+                <form id="reservation-form">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Buyer Full Name</label>
+                            <input type="text" id="res-name" required placeholder="Marcus Sterling" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Email for Receipt</label>
+                            <input type="email" id="res-email" required placeholder="buyer@domain.com" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Delivery Address</label>
+                        <input type="text" id="res-address" required placeholder="742 Evergreen Terrace, Beverly Hills, CA" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 1.5rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Simulated Payment Method ($1,000 Token Hold)</label>
+                        <select id="res-payment-method" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <option value="Credit Card / Stripe Escrow">Credit Card / Token Escrow (Instant)</option>
+                            <option value="Apple Pay / Google Pay">Apple Pay / Mobile Wallet</option>
+                            <option value="Wire Transfer Reservation">Dealership Wire Transfer Hold</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%;">
+                        <i class="fas fa-lock"></i> Authorize $1,000 Deposit & Reserve Vehicle
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer" style="padding: 60px 0 30px; background: #08080a; border-top: 1px solid var(--extra); margin-top: 60px;">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <a href="index.html" class="logo" style="font-size: 1.5rem; display: inline-block; margin-bottom: 1rem;">WHEELS</a>
+            <p style="color: var(--accent); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem;">
+                Official Authorized Showroom for Brand New Luxury & High-Performance Vehicles.
+            </p>
+            <div style="color: var(--accent); font-size: 0.8rem;">
+                © 2026 WHEELS LLC. All rights reserved. Transparent vehicle sales platform.
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="js/car-db.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const carId = urlParams.get('id') || 'car-taycan-gt-2026';
+            const car = window.carDB.getCarById(carId);
+
+            let selectedColor = car.colors[0];
+            let selectedTrim = car.trims[0];
+            let currentAngleIdx = 0;
+
+            // Populate Page Content
+            document.title = `${car.name} - 2026 New Vehicle Sales | WHEELS`;
+            document.getElementById('breadcrumb-car-name').textContent = car.name;
+            document.getElementById('car-title').textContent = car.name;
+            document.getElementById('car-tagline').textContent = car.tagline;
+            document.getElementById('car-overview-text').textContent = car.overview;
+
+            document.getElementById('spec-0-60').textContent = car.zeroToSixty;
+            document.getElementById('spec-hp').textContent = car.horsepower + ' HP';
+            document.getElementById('spec-top-speed').textContent = car.topSpeed;
+            document.getElementById('spec-range').textContent = car.rangeOrMpg;
+
+            document.getElementById('spec-engine').textContent = car.engine;
+            document.getElementById('spec-transmission').textContent = car.transmission;
+            document.getElementById('spec-drivetrain').textContent = car.drivetrain || 'All-Wheel Drive';
+            document.getElementById('spec-warranty').textContent = car.warranty;
+            document.getElementById('stock-units-badge').textContent = `${car.stockCount} Units In Stock`;
+
+            // Setup Main Image Viewer
+            const viewerImg = document.getElementById('viewer-img');
+            const gallery = car.gallery && car.gallery.length > 0 ? car.gallery : [car.image];
+            viewerImg.src = gallery[0];
+
+            // Angle Switcher
+            document.querySelectorAll('.angle-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const idx = parseInt(btn.getAttribute('data-angle')) || 0;
+                    currentAngleIdx = idx % gallery.length;
+                    viewerImg.src = gallery[currentAngleIdx];
+                });
+            });
+
+            // Setup Color Swatches
+            const swatchesContainer = document.getElementById('color-swatches-container');
+            swatchesContainer.innerHTML = car.colors.map((c, i) => `
+                <button type="button" class="color-swatch-btn ${i === 0 ? 'active' : ''}" 
+                    style="background: ${c.hex};" 
+                    data-color="${c.name}" 
+                    data-hex="${c.hex}" 
+                    title="${c.name}">
+                </button>
+            `).join('');
+
+            swatchesContainer.querySelectorAll('.color-swatch-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    swatchesContainer.querySelectorAll('.color-swatch-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const colorName = btn.getAttribute('data-color');
+                    const colorHex = btn.getAttribute('data-hex');
+                    selectedColor = { name: colorName, hex: colorHex };
+                    document.getElementById('color-dot').style.background = colorHex;
+                    document.getElementById('color-name-label').textContent = colorName;
+                    showToast(`Selected paint: ${colorName}`, 'info');
+                });
+            });
+
+            // Setup Trims List
+            const trimContainer = document.getElementById('trim-list-container');
+            trimContainer.innerHTML = car.trims.map((t, i) => `
+                <div class="trim-option-card ${i === 0 ? 'active' : ''}" data-idx="${i}">
+                    <div class="trim-left">
+                        <strong>${t.name}</strong>
+                        <small>${t.desc}</small>
+                    </div>
+                    <div class="trim-price-offset">
+                        ${t.priceOffset === 0 ? 'Included' : '+$' + t.priceOffset.toLocaleString()}
+                    </div>
+                </div>
+            `).join('');
+
+            function calculatePrice() {
+                const totalPrice = car.price + (selectedTrim.priceOffset || 0);
+                document.getElementById('live-msrp-display').textContent = '$' + totalPrice.toLocaleString();
+                
+                // Est. 60 mo lease / loan
+                const estPayment = Math.round(totalPrice / 72);
+                document.getElementById('live-est-payment').textContent = `Est. $${estPayment.toLocaleString()} / mo`;
+                
+                updateFinancingCalc(totalPrice);
+                return totalPrice;
+            }
+
+            trimContainer.querySelectorAll('.trim-option-card').forEach(card => {
+                card.addEventListener('click', () => {
+                    trimContainer.querySelectorAll('.trim-option-card').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+                    const idx = parseInt(card.getAttribute('data-idx'));
+                    selectedTrim = car.trims[idx];
+                    calculatePrice();
+                });
+            });
+
+            // Setup Wishlist & Compare Buttons
+            const wishlistBtn = document.getElementById('btn-save-wishlist');
+            function updateWishlistState() {
+                const inWishlist = window.carDB.isInWishlist(car.id);
+                wishlistBtn.innerHTML = inWishlist ? '<i class="fas fa-heart" style="color: var(--secondary);"></i>' : '<i class="far fa-heart"></i>';
+                wishlistBtn.classList.toggle('active', inWishlist);
+            }
+            wishlistBtn.addEventListener('click', () => {
+                const res = window.carDB.toggleWishlist(car.id);
+                updateWishlistState();
+                showToast(res.added ? `${car.name} saved to Wishlist` : 'Removed from Wishlist', 'success');
+            });
+            updateWishlistState();
+
+            const compareBtn = document.getElementById('btn-toggle-compare');
+            function updateCompareState() {
+                const inCompare = window.carDB.isInCompare(car.id);
+                compareBtn.classList.toggle('active', inCompare);
+            }
+            compareBtn.addEventListener('click', () => {
+                const res = window.carDB.toggleCompare(car.id);
+                if (res.error) {
+                    showToast(res.error, 'error');
+                } else {
+                    updateCompareState();
+                    showToast(res.added ? `Added to comparison (${res.total}/4)` : 'Removed from compare', 'info');
+                }
+            });
+            updateCompareState();
+
+            // Setup Financing Calculator
+            let selectedTerm = 60;
+            const downSlider = document.getElementById('down-payment-slider');
+            const aprSlider = document.getElementById('apr-slider');
+            const tradeinSlider = document.getElementById('tradein-slider');
+
+            function updateFinancingCalc(currentPrice) {
+                const price = currentPrice || (car.price + selectedTrim.priceOffset);
+                const downPercent = parseInt(downSlider.value);
+                const downAmount = Math.round(price * (downPercent / 100));
+                document.getElementById('down-payment-val').textContent = `$${downAmount.toLocaleString()} (${downPercent}%)`;
+
+                const apr = parseFloat(aprSlider.value);
+                document.getElementById('apr-val').textContent = `${apr}% APR`;
+
+                const tradein = parseInt(tradeinSlider.value);
+                document.getElementById('tradein-val').textContent = `$${tradein.toLocaleString()}`;
+
+                const principal = Math.max(0, price - downAmount - tradein);
+                const monthlyRate = (apr / 100) / 12;
+                let monthlyPayment = 0;
+                if (monthlyRate > 0) {
+                    monthlyPayment = (principal * monthlyRate * Math.pow(1 + monthlyRate, selectedTerm)) / (Math.pow(1 + monthlyRate, selectedTerm) - 1);
+                } else {
+                    monthlyPayment = principal / selectedTerm;
+                }
+
+                document.getElementById('calc-monthly-total').textContent = `$${Math.round(monthlyPayment).toLocaleString()} / mo`;
+                document.getElementById('calc-breakdown-sub').textContent = `Based on $${principal.toLocaleString()} Financed Amount over ${selectedTerm} Months at ${apr}% APR`;
+            }
+
+            downSlider.addEventListener('input', () => updateFinancingCalc());
+            aprSlider.addEventListener('input', () => updateFinancingCalc());
+            tradeinSlider.addEventListener('input', () => updateFinancingCalc());
+
+            document.querySelectorAll('.term-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.term-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    selectedTerm = parseInt(btn.getAttribute('data-term'));
+                    updateFinancingCalc();
+                });
+            });
+
+            document.getElementById('btn-scroll-to-calc').addEventListener('click', () => {
+                document.getElementById('finance-section').scrollIntoView({ behavior: 'smooth' });
+            });
+
+            // Test Drive Modal
+            const testDriveModal = document.getElementById('modal-test-drive');
+            document.getElementById('btn-open-testdrive-modal').addEventListener('click', () => {
+                document.getElementById('td-car-name').value = `${car.brand} ${car.name} (${car.year})`;
+                const curUser = window.authManager.getCurrentUser();
+                if (curUser) {
+                    document.getElementById('td-name').value = curUser.name;
+                    document.getElementById('td-email').value = curUser.email;
+                }
+                const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+                document.getElementById('td-date').value = tomorrow;
+                testDriveModal.classList.add('active');
+            });
+
+            document.getElementById('test-drive-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const booking = window.carDB.bookTestDrive({
+                    customerName: document.getElementById('td-name').value,
+                    customerEmail: document.getElementById('td-email').value,
+                    customerPhone: document.getElementById('td-phone').value,
+                    carId: car.id,
+                    carName: car.name,
+                    date: document.getElementById('td-date').value,
+                    time: document.getElementById('td-time').value,
+                    showroom: document.getElementById('td-showroom').value,
+                    testDriveType: 'Showroom Track Experience'
+                });
+
+                testDriveModal.classList.remove('active');
+                showToast(`VIP Test Drive scheduled! Confirmation #${booking.id}`, 'success');
+            });
+
+            // Reservation Modal
+            const reserveModal = document.getElementById('modal-reserve');
+            document.getElementById('btn-open-reserve-modal').addEventListener('click', () => {
+                const totalPrice = calculatePrice();
+                document.getElementById('res-summary-car').textContent = `${car.brand} ${car.name}`;
+                document.getElementById('res-summary-total').textContent = '$' + totalPrice.toLocaleString();
+                document.getElementById('res-summary-trim').textContent = selectedTrim.name;
+                document.getElementById('res-summary-color').textContent = selectedColor.name;
+
+                const curUser = window.authManager.getCurrentUser();
+                if (curUser) {
+                    document.getElementById('res-name').value = curUser.name;
+                    document.getElementById('res-email').value = curUser.email;
+                }
+                reserveModal.classList.add('active');
+            });
+
+            document.getElementById('reservation-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const totalPrice = calculatePrice();
+                const newOrder = window.carDB.createOrder({
+                    customerName: document.getElementById('res-name').value,
+                    customerEmail: document.getElementById('res-email').value,
+                    deliveryAddress: document.getElementById('res-address').value,
+                    paymentMethod: document.getElementById('res-payment-method').value,
+                    carId: car.id,
+                    carName: car.name,
+                    selectedColor: selectedColor.name,
+                    selectedTrim: selectedTrim.name,
+                    basePrice: car.price,
+                    trimOffset: selectedTrim.priceOffset,
+                    totalPrice: totalPrice,
+                    depositPaid: 1000
+                });
+
+                reserveModal.classList.remove('active');
+                showToast(`Vehicle Reserved! Order #${newOrder.id}. Token hold confirmed.`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'dashboard.html';
+                }, 1200);
+            });
+
+            // Initial calculation
+            calculatePrice();
+        });
+    </script>
+</body>
+
+</html>

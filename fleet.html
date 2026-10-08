@@ -4,386 +4,259 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Fleet - VELOCITY BLACK</title>
+    <title>New Vehicle Inventory - WHEELS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
     <style>
         .page-header {
-            background: linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(220, 20, 60, 0.7) 100%), url('https://images.unsplash.com/photo-1492144534655-ae79c2c03457?w=1920&h=600&fit=crop') center/cover;
-            padding: 150px 2rem 80px;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.95) 0%, rgba(37, 99, 235, 0.75) 100%), url('https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1920&fit=crop') center/cover;
+            padding: 140px 2rem 60px;
             text-align: center;
-            margin-top: 70px;
         }
 
         .fleet-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 3rem 2rem;
-            display: flex;
-            gap: 2rem;
-            align-items: flex-start;
-            width: 100%;
-            box-sizing: border-box;
+            padding: 2.5rem 1.5rem;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 2.5rem;
+            align-items: start;
         }
 
         /* Filter Sidebar */
         .filter-sidebar {
-            width: 300px;
-            background: var(--primary);
-            border: 2px solid var(--extra);
-            padding: 2rem;
-            padding-top: 2rem;
-            position: relative;
-            top: auto;
-            max-height: none;
-            overflow: visible;
-            box-sizing: border-box;
-            flex-shrink: 0;
-            z-index: 100;
-        }
-
-        .filter-section {
-            margin-bottom: 2rem;
-        }
-
-        .filter-section:last-child {
-            margin-bottom: 0;
-        }
-
-        .filter-section h3 {
-            font-family: var(--font-heading);
-            color: var(--secondary);
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: left;
-        }
-
-        .filter-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.8rem;
-        }
-
-        .filter-option {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-option:hover {
-            color: var(--secondary);
-        }
-
-        .filter-option input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            cursor: pointer;
-            accent-color: var(--secondary);
-            flex-shrink: 0;
-        }
-
-        .filter-option label {
-            cursor: pointer;
-            font-family: var(--font-body);
-            color: var(--text);
-            font-size: 0.95rem;
-            margin: 0;
-            flex: 1;
-            text-align: left;
-        }
-
-        /* Price Range Slider */
-        .price-slider-container {
-            margin-top: 0.5rem;
-        }
-
-        .price-slider {
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
             background: var(--subtle);
-            outline: none;
-            -webkit-appearance: none;
-            appearance: none;
+            border: 1px solid var(--extra);
+            border-radius: 16px;
+            padding: 1.8rem;
+            position: sticky;
+            top: 95px;
         }
 
-        .price-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--secondary);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .price-slider::-webkit-slider-thumb:hover {
-            background: var(--highlight);
-            transform: scale(1.2);
-        }
-
-        .price-slider::-moz-range-thumb {
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: var(--secondary);
-            cursor: pointer;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .price-slider::-moz-range-thumb:hover {
-            background: var(--highlight);
-            transform: scale(1.2);
-        }
-
-        .price-output {
-            color: var(--secondary);
-            font-weight: 600;
-            margin-top: 0.5rem;
-            text-align: left;
-            font-size: 1rem;
-        }
-
-        /* Apply Filters Button */
-        .apply-filters-btn {
-            width: 100%;
-            padding: 14px 30px;
-            background: linear-gradient(135deg, var(--secondary) 0%, var(--highlight) 100%);
-            color: var(--text);
-            border: none;
-            font-family: var(--font-accent);
-            font-weight: 700;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 1rem;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
-            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.3);
-        }
-
-        .apply-filters-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(220, 20, 60, 0.5);
-            background: linear-gradient(135deg, var(--highlight) 0%, var(--secondary) 100%);
-        }
-
-        /* Cars Grid */
-        .cars-grid-container {
-            flex: 1;
-            width: 100%;
-            min-width: 0;
-        }
-
-        .cars-header {
+        .filter-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--extra);
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-header h3 {
+            font-size: 1.1rem;
+            margin: 0;
+            text-align: left;
+        }
+
+        .btn-reset-filters {
+            background: transparent;
+            border: none;
+            color: var(--secondary);
+            font-size: 0.8rem;
+            font-family: var(--font-accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .filter-group-title {
+            font-size: 0.85rem;
+            font-family: var(--font-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+
+        .filter-checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .filter-label {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            cursor: pointer;
+            text-align: left;
+        }
+
+        .filter-label input[type="checkbox"] {
+            accent-color: var(--secondary);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Inventory Search & Sort Toolbar */
+        .inventory-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--subtle);
+            border: 1px solid var(--extra);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.8rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
 
-        .cars-header h2 {
-            margin: 0;
-            text-align: left;
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            border-radius: 8px;
+            padding: 8px 14px;
+            width: 320px;
         }
 
-        .cars-count {
-            color: var(--accent);
-            font-size: 1rem;
-        }
-
-        .cars-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        /* Filter Toggle Button for Mobile/Tablet */
-        .filter-toggle {
-            display: none;
-            background: var(--secondary);
-            color: var(--text);
+        .search-box input {
+            background: transparent;
             border: none;
-            padding: 12px 24px;
-            font-family: var(--font-accent);
-            font-weight: 700;
+            color: #fff;
+            outline: none;
+            width: 100%;
+            margin-left: 8px;
             font-size: 0.9rem;
-            text-transform: uppercase;
-            cursor: pointer;
+        }
+
+        .sort-select {
+            background: var(--primary);
+            border: 1px solid var(--extra);
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        /* Cars Grid */
+        .cars-catalog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.8rem;
+        }
+
+        .showroom-car-card {
+            background: var(--subtle);
+            border: 1px solid var(--extra);
+            border-radius: 16px;
+            overflow: hidden;
             transition: all 0.3s ease;
-            clip-path: polygon(5% 0%, 100% 0%, 95% 100%, 0% 100%);
-            align-items: center;
-            gap: 0.5rem;
             position: relative;
-            z-index: 10;
+            display: flex;
+            flex-direction: column;
         }
 
-        .filter-toggle i {
-            font-size: 1.1rem;
+        .showroom-car-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.3);
         }
 
-        .filter-toggle:hover {
-            background: var(--highlight);
-            transform: translateY(-2px);
+        .car-thumb-wrap {
+            position: relative;
+            height: 210px;
+            overflow: hidden;
+            background: #09090b;
         }
 
-        /* Close Button for Filter Sidebar */
-        .filter-close-btn {
-            display: none;
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            background: var(--secondary);
-            color: var(--text);
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            z-index: 1001;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .filter-close-btn:hover {
-            background: var(--highlight);
-            transform: rotate(90deg) scale(1.1);
-        }
-
-        .filter-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
+        .car-thumb-wrap img {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
 
-        .filter-overlay.active {
+        .showroom-car-card:hover .car-thumb-wrap img {
+            transform: scale(1.06);
+        }
+
+        .car-card-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .car-card-brand-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            font-family: var(--font-accent);
+            color: var(--accent);
+            letter-spacing: 0.5px;
+            margin-bottom: 0.4rem;
+        }
+
+        .car-card-title {
+            font-size: 1.25rem;
+            text-align: left;
+            margin-bottom: 0.4rem;
+        }
+
+        .car-card-price-row {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 1.2rem;
+        }
+
+        .car-price-msrp {
+            font-family: var(--font-heading);
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+
+        .car-card-specs-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+            padding: 0.8rem 0;
+            border-top: 1px solid var(--extra);
+            border-bottom: 1px solid var(--extra);
+            margin-bottom: 1.2rem;
+            text-align: center;
+        }
+
+        .spec-item small {
             display: block;
-            opacity: 1;
-            pointer-events: all;
+            font-size: 0.7rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            font-family: var(--font-accent);
         }
 
-        /* Mobile/Tablet Styles */
-        @media (max-width: 1024px) {
-            .fleet-container {
-                flex-direction: column;
-                padding: 2rem 1rem;
-            }
-
-            .filter-sidebar {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                width: 320px;
-                max-width: 85vw;
-                height: calc(100vh - 70px);
-                max-height: none;
-                z-index: 1001;
-                transition: left 0.3s ease;
-                border-right: 2px solid var(--secondary);
-                box-shadow: 5px 0 30px rgba(0, 0, 0, 0.5);
-                overflow-y: auto;
-                padding-top: 3.5rem;
-            }
-
-            .filter-sidebar.active {
-                left: 0;
-            }
-
-            .filter-toggle {
-                display: flex !important;
-                position: relative;
-                z-index: 10;
-            }
-
-            .filter-close-btn {
-                display: flex !important;
-            }
-
-            .cars-grid-container {
-                width: 100%;
-            }
-
-            .cars-header {
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                position: relative;
-                z-index: 1;
-            }
-
-            .cars-header h2 {
-                width: auto;
-            }
-
-            .filter-toggle {
-                position: relative;
-                z-index: 10;
-                pointer-events: auto;
-                -webkit-tap-highlight-color: rgba(220, 20, 60, 0.3);
-            }
+        .spec-item strong {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            color: #fff;
         }
 
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             .fleet-container {
-                padding: 1.5rem 1rem;
-            }
-
-            .filter-sidebar {
-                width: 100%;
-                max-width: 100%;
-                left: -100%;
-            }
-
-            .filter-sidebar.active {
-                left: 0;
-            }
-
-            .cars-grid {
                 grid-template-columns: 1fr;
             }
-
-            .page-header {
-                padding: 120px 1.5rem 60px;
-            }
-
-            .cars-header {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .filter-toggle {
-                width: 100%;
-                justify-content: center;
-                position: relative;
-                z-index: 10;
-                pointer-events: auto;
+            .filter-sidebar {
+                position: static;
             }
         }
-
-        /* Scrollbar styling removed for static sidebar */
     </style>
 </head>
 
@@ -391,26 +264,17 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="logo">VELOCITY BLACK</a>
+            <a href="index.html" class="logo">WHEELS</a>
             <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="#" class="dropdown-toggle">Home <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Page</a></li>
-                        <li><a href="index2.html">Home Page 2</a></li>
-                    </ul>
-                </li>
-                <li><a href="fleet.html" class="active">Fleet</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="locations.html">Locations</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fleet.html" class="active">New Inventory</a></li>
+                <li><a href="services.html">Services & Financing</a></li>
+                <li><a href="locations.html">Showrooms</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="dashboard.html" class="btn btn-secondary"
-                    style="padding: 10px 20px; font-size: 0.9rem;">Dashboard</a>
-                <a href="login.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Login</a>
-                <a href="register.html" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Register</a>
+                <!-- Injected via auth.js / main.js -->
             </div>
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
         </div>
@@ -418,622 +282,381 @@
 
     <!-- PAGE HEADER -->
     <section class="page-header">
-        <h1>Our Fleet</h1>
-        <p style="font-size: 1.2rem; margin-top: 1rem;">Choose from our premium collection of vehicles</p>
-    </section>
-
-    <!-- FLEET SECTION -->
-    <section class="section" style="padding-top: 0;">
-        <div class="fleet-container">
-            <!-- Filter Overlay for Mobile/Tablet -->
-            <div class="filter-overlay" id="filterOverlay"></div>
-
-            <!-- Filter Sidebar -->
-            <aside class="filter-sidebar" id="filterSidebar">
-                <!-- Close Button for Mobile/Tablet -->
-                <button class="filter-close-btn" id="filterCloseBtn" aria-label="Close Filters">
-                    <i class="fas fa-times"></i>
-                </button>
-
-                <!-- Car Type -->
-                <div class="filter-section">
-                    <h3>Car Type</h3>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="type-economy" name="car-type" value="economy">
-                            <label for="type-economy">Economy</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="type-compact" name="car-type" value="compact">
-                            <label for="type-compact">Compact</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="type-sedan" name="car-type" value="sedan">
-                            <label for="type-sedan">Sedan</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="type-suv" name="car-type" value="suv">
-                            <label for="type-suv">SUV</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="type-luxury" name="car-type" value="luxury">
-                            <label for="type-luxury">Luxury</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="type-sports" name="car-type" value="sports">
-                            <label for="type-sports">Sports</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Price Range -->
-                <div class="filter-section">
-                    <h3>Price Range</h3>
-                    <div class="price-slider-container">
-                        <input type="range" min="30" max="200" value="200" class="price-slider" id="priceSlider">
-                        <div class="price-output" id="priceOutput">$200/day</div>
-                    </div>
-                </div>
-
-                <!-- Transmission -->
-                <div class="filter-section">
-                    <h3>Transmission</h3>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="trans-auto" name="transmission" value="automatic">
-                            <label for="trans-auto">Automatic</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="trans-manual" name="transmission" value="manual">
-                            <label for="trans-manual">Manual</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Fuel Type -->
-                <div class="filter-section">
-                    <h3>Fuel Type</h3>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="fuel-petrol" name="fuel-type" value="petrol">
-                            <label for="fuel-petrol">Petrol</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="fuel-diesel" name="fuel-type" value="diesel">
-                            <label for="fuel-diesel">Diesel</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="fuel-hybrid" name="fuel-type" value="hybrid">
-                            <label for="fuel-hybrid">Hybrid</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="fuel-electric" name="fuel-type" value="electric">
-                            <label for="fuel-electric">Electric</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Seats -->
-                <div class="filter-section">
-                    <h3>Seats</h3>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="seats-2" name="seats" value="2">
-                            <label for="seats-2">2 Seats</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="seats-4" name="seats" value="4">
-                            <label for="seats-4">4 Seats</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="seats-5" name="seats" value="5">
-                            <label for="seats-5">5 Seats</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="seats-7" name="seats" value="7">
-                            <label for="seats-7">7+ Seats</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Features -->
-                <div class="filter-section">
-                    <h3>Features</h3>
-                    <div class="filter-options">
-                        <div class="filter-option">
-                            <input type="checkbox" id="feature-gps" name="features" value="gps">
-                            <label for="feature-gps">GPS Navigation</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="feature-bluetooth" name="features" value="bluetooth">
-                            <label for="feature-bluetooth">Bluetooth</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="feature-camera" name="features" value="camera">
-                            <label for="feature-camera">Backup Camera</label>
-                        </div>
-                        <div class="filter-option">
-                            <input type="checkbox" id="feature-sunroof" name="features" value="sunroof">
-                            <label for="feature-sunroof">Sunroof</label>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Apply Filters Button -->
-                <button class="apply-filters-btn" id="applyFilters">
-                    Apply Filters
-                </button>
-            </aside>
-
-            <!-- Cars Grid -->
-            <div class="cars-grid-container">
-                <div class="cars-header">
-                    <div>
-                        <h2>Available Cars</h2>
-                        <p class="cars-count" id="carsCount">Showing 12 cars</p>
-                    </div>
-                    <button class="filter-toggle" id="filterToggle">
-                        <i class="fas fa-filter"></i>
-                        <span>Filters</span>
-                    </button>
-                </div>
-
-                <div class="cars-grid" id="carsGrid">
-                    <!-- Car cards will be dynamically loaded here -->
-                    <div class="car-card" data-type="economy" data-price="39" data-transmission="manual"
-                        data-fuel="petrol" data-seats="5" data-features="gps,bluetooth">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?w=800&h=600&fit=crop"
-                                alt="Economy Car">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Honda Civic</h3>
-                            <span class="car-card-category">Economy</span>
-                            <div class="car-card-price">$39/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 5 Seats</span>
-                                <span><i class="fas fa-cog"></i> Manual</span>
-                                <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="compact" data-price="45" data-transmission="automatic"
-                        data-fuel="hybrid" data-seats="5" data-features="gps,bluetooth,camera">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&h=600&fit=crop"
-                                alt="Compact Car">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Toyota Corolla</h3>
-                            <span class="car-card-category">Compact</span>
-                            <div class="car-card-price">$45/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 5 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-gas-pump"></i> Hybrid</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="sedan" data-price="79" data-transmission="automatic"
-                        data-fuel="petrol" data-seats="5" data-features="gps,bluetooth,camera,sunroof">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=600&fit=crop"
-                                alt="Sedan">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Audi A6</h3>
-                            <span class="car-card-category">Sedan</span>
-                            <div class="car-card-price">$79/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 5 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="luxury" data-price="89" data-transmission="automatic"
-                        data-fuel="petrol" data-seats="5" data-features="gps,bluetooth,camera,sunroof">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop"
-                                alt="Luxury Sedan">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Mercedes-Benz E-Class</h3>
-                            <span class="car-card-category">Luxury</span>
-                            <div class="car-card-price">$89/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 5 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="suv" data-price="109" data-transmission="automatic"
-                        data-fuel="diesel" data-seats="7" data-features="gps,bluetooth,camera,sunroof">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&h=600&fit=crop"
-                                alt="SUV">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Range Rover Sport</h3>
-                            <span class="car-card-category">SUV</span>
-                            <div class="car-card-price">$109/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 7 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-gas-pump"></i> Diesel</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="sports" data-price="129" data-transmission="automatic"
-                        data-fuel="petrol" data-seats="4" data-features="gps,bluetooth,camera,sunroof">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop"
-                                alt="Sports Car">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">BMW M4 Coupe</h3>
-                            <span class="car-card-category">Sports</span>
-                            <div class="car-card-price">$129/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 4 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="electric" data-price="99" data-transmission="automatic"
-                        data-fuel="electric" data-seats="5" data-features="gps,bluetooth,camera">
-                        <div class="car-card-image">
-                            <img src="https://cdn.motor1.com/images/mgl/rK4wRO/s1/2024-tesla-model-3-highland.jpg"
-                                alt="Electric">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Tesla Model 3</h3>
-                            <span class="car-card-category">Electric</span>
-                            <div class="car-card-price">$99/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 5 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-bolt"></i> Electric</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="car-card" data-type="luxury" data-price="149" data-transmission="automatic"
-                        data-fuel="petrol" data-seats="5" data-features="gps,bluetooth,camera,sunroof">
-                        <div class="car-card-image">
-                            <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=600&fit=crop"
-                                alt="Luxury SUV">
-                        </div>
-                        <div class="car-card-content">
-                            <h3 class="car-card-title">Porsche Cayenne</h3>
-                            <span class="car-card-category">Luxury SUV</span>
-                            <div class="car-card-price">$149/day</div>
-                            <div class="car-card-features">
-                                <span><i class="fas fa-users"></i> 5 Seats</span>
-                                <span><i class="fas fa-cog"></i> Auto</span>
-                                <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                            </div>
-                            <div class="car-card-actions">
-                                <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                                <a href="#" class="btn" style="flex: 1;">Book Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h1 style="margin-bottom: 0.5rem; font-size: 2.8rem;">2026 BRAND NEW VEHICLES</h1>
+            <p style="color: var(--accent); max-width: 700px; margin: 0 auto; font-size: 1.05rem;">
+                Explore our curated showroom of factory-fresh performance supercars, luxury sedans, and high-voltage electric hyper-GTs.
+            </p>
         </div>
     </section>
+
+    <!-- INVENTORY CONTAINER -->
+    <div class="fleet-container">
+        <!-- SIDEBAR FILTERS -->
+        <aside class="filter-sidebar">
+            <div class="filter-header">
+                <h3><i class="fas fa-filter" style="color: var(--secondary);"></i> Filters</h3>
+                <button type="button" class="btn-reset-filters" id="btn-reset-filters">Reset All</button>
+            </div>
+
+            <!-- Brands Filter -->
+            <div class="filter-group">
+                <div class="filter-group-title">Brand / Manufacturer</div>
+                <div class="filter-checkbox-list" id="brand-filters">
+                    <label class="filter-label"><input type="checkbox" value="Porsche"> Porsche</label>
+                    <label class="filter-label"><input type="checkbox" value="Mercedes-AMG"> Mercedes-AMG</label>
+                    <label class="filter-label"><input type="checkbox" value="Ferrari"> Ferrari</label>
+                    <label class="filter-label"><input type="checkbox" value="BMW"> BMW</label>
+                    <label class="filter-label"><input type="checkbox" value="Lucid"> Lucid</label>
+                    <label class="filter-label"><input type="checkbox" value="Land Rover"> Land Rover</label>
+                    <label class="filter-label"><input type="checkbox" value="Tesla"> Tesla</label>
+                    <label class="filter-label"><input type="checkbox" value="Audi"> Audi</label>
+                </div>
+            </div>
+
+            <!-- Body Types -->
+            <div class="filter-group">
+                <div class="filter-group-title">Body Style</div>
+                <div class="filter-checkbox-list" id="body-filters">
+                    <label class="filter-label"><input type="checkbox" value="Sedan"> Sedan</label>
+                    <label class="filter-label"><input type="checkbox" value="Coupe"> Coupe / Supercar</label>
+                    <label class="filter-label"><input type="checkbox" value="SUV"> Luxury SUV</label>
+                </div>
+            </div>
+
+            <!-- Powertrain -->
+            <div class="filter-group">
+                <div class="filter-group-title">Powertrain</div>
+                <div class="filter-checkbox-list" id="fuel-filters">
+                    <label class="filter-label"><input type="checkbox" value="Electric"> 100% Electric (EV)</label>
+                    <label class="filter-label"><input type="checkbox" value="Plug-in Hybrid"> Hybrid / PHEV</label>
+                    <label class="filter-label"><input type="checkbox" value="Petrol"> Twin-Turbo Petrol</label>
+                </div>
+            </div>
+
+            <!-- Max Price Range -->
+            <div class="filter-group">
+                <div class="filter-group-title">Max MSRP Price</div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.85rem; color: var(--accent); margin-bottom: 6px;">
+                    <span>$100k</span>
+                    <strong id="price-slider-display" style="color: #fff;">$350,000</strong>
+                </div>
+                <input type="range" id="price-range-slider" min="100000" max="350000" step="10000" value="350000" style="width: 100%; accent-color: var(--secondary);">
+            </div>
+        </aside>
+
+        <!-- MAIN INVENTORY AREA -->
+        <main>
+            <!-- Toolbar -->
+            <div class="inventory-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search" style="color: var(--accent);"></i>
+                    <input type="text" id="inventory-search" placeholder="Search by model, engine, horsepower...">
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <span style="font-size: 0.85rem; color: var(--accent);" id="results-count">Showing 8 vehicles</span>
+                    <select class="sort-select" id="sort-select">
+                        <option value="featured">Featured First</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="hp-desc">Horsepower: Highest</option>
+                        <option value="acc-asc">0-60 Time: Fastest</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Cars Grid Container -->
+            <div class="cars-catalog-grid" id="cars-grid">
+                <!-- Injected via JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <!-- QUICK TEST DRIVE MODAL -->
+    <div class="modal-backdrop" id="quick-td-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-calendar-check" style="color: var(--secondary);"></i> Quick Test Drive Booking</h3>
+                <button class="modal-close-btn" onclick="document.getElementById('quick-td-modal').classList.remove('active')">✕</button>
+            </div>
+            <div class="modal-body">
+                <form id="quick-td-form">
+                    <input type="hidden" id="modal-car-id">
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Selected Car</label>
+                        <input type="text" id="modal-car-title" readonly style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Your Name</label>
+                            <input type="text" id="modal-cust-name" required placeholder="Marcus Sterling" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Phone Number</label>
+                            <input type="tel" id="modal-cust-phone" required placeholder="+1 (555) 000-0000" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Email Address</label>
+                        <input type="email" id="modal-cust-email" required placeholder="you@domain.com" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Preferred Date</label>
+                            <input type="date" id="modal-cust-date" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        </div>
+                        <div class="form-group">
+                            <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Time</label>
+                            <select id="modal-cust-time" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                                <option value="10:00 AM">10:00 AM</option>
+                                <option value="01:30 PM">01:30 PM</option>
+                                <option value="04:00 PM">04:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn" style="width: 100%;">Schedule Experience</button>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <!-- FOOTER -->
-    <footer class="footer carbon-fiber">
-        <div class="footer-content">
-            <div class="footer-section">
-                <a href="index.html" class="logo">VELOCITY BLACK</a>
-                <p>Premium car rental service for your every journey. Experience luxury, reliability, and exceptional
-                    service.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+    <footer class="footer" style="padding: 60px 0 30px; background: #08080a; border-top: 1px solid var(--extra); margin-top: 60px;">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <a href="index.html" class="logo" style="font-size: 1.5rem; display: inline-block; margin-bottom: 1rem;">WHEELS</a>
+            <p style="color: var(--accent); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem;">
+                Authorized New Vehicle Dealership & Sales Platform.
+            </p>
+            <div style="color: var(--accent); font-size: 0.8rem;">
+                © 2026 WHEELS LLC. All rights reserved.
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="locations.html">Locations</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Car Categories</h3>
-                <ul>
-                    <li><a href="fleet.html">Economy</a></li>
-                    <li><a href="fleet.html">Compact</a></li>
-                    <li><a href="fleet.html">Sedan</a></li>
-                    <li><a href="fleet.html">SUV</a></li>
-                    <li><a href="fleet.html">Luxury</a></li>
-                    <li><a href="fleet.html">Sports</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul>
-                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> info@velocityblack.com</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Speed Avenue, City, State 12345</li>
-                    <li><i class="fas fa-clock"></i> Open 24/7</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 VELOCITY BLACK. All rights reserved. | <a href="#" style="color: var(--accent);">Privacy
-                    Policy</a> | <a href="#" style="color: var(--accent);">Terms of Service</a></p>
         </div>
     </footer>
 
-    <!-- BACK TO TOP BUTTON -->
-    <button class="back-to-top" aria-label="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+    <!-- SCRIPTS -->
+    <script src="js/car-db.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
     <script>
-        // Wait for DOM to be fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
-            // Filter Toggle for Mobile/Tablet
-            const filterToggle = document.getElementById('filterToggle');
-            const filterSidebar = document.getElementById('filterSidebar');
-            const filterOverlay = document.getElementById('filterOverlay');
+        document.addEventListener('DOMContentLoaded', () => {
+            const carsGrid = document.getElementById('cars-grid');
+            const searchInput = document.getElementById('inventory-search');
+            const sortSelect = document.getElementById('sort-select');
+            const priceSlider = document.getElementById('price-range-slider');
+            const priceDisplay = document.getElementById('price-slider-display');
+            const resultsCount = document.getElementById('results-count');
+            const btnReset = document.getElementById('btn-reset-filters');
 
-            // Ensure filter toggle is visible on mobile/tablet
-            function updateFilterToggleVisibility() {
-                if (window.innerWidth <= 1024 && filterToggle) {
-                    filterToggle.style.display = 'flex';
-                } else if (window.innerWidth > 1024 && filterToggle) {
-                    filterToggle.style.display = 'none';
-                }
+            const urlParams = new URLSearchParams(window.location.search);
+            const isWishlistOnly = urlParams.get('filter') === 'wishlist';
+            const initialSearch = urlParams.get('search');
+            if (initialSearch) {
+                searchInput.value = initialSearch;
             }
 
-            // Initial check
-            updateFilterToggleVisibility();
+            function renderInventory() {
+                const allCars = window.carDB.getAllCars();
+                const wishlist = window.carDB.getWishlist();
+                const compareList = window.carDB.getCompareList();
 
-            // Update on resize
-            let resizeTimer;
-            window.addEventListener('resize', function () {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function () {
-                    updateFilterToggleVisibility();
-                }, 250);
+                const searchTerm = searchInput.value.toLowerCase().trim();
+                const maxPrice = parseInt(priceSlider.value);
+                const selectedBrands = Array.from(document.querySelectorAll('#brand-filters input:checked')).map(cb => cb.value);
+                const selectedBodies = Array.from(document.querySelectorAll('#body-filters input:checked')).map(cb => cb.value);
+                const selectedFuels = Array.from(document.querySelectorAll('#fuel-filters input:checked')).map(cb => cb.value);
+
+                let filtered = allCars.filter(car => {
+                    if (isWishlistOnly && !wishlist.includes(car.id)) return false;
+
+                    if (searchTerm) {
+                        const matchText = `${car.brand} ${car.name} ${car.engine} ${car.fuelType} ${car.bodyType}`.toLowerCase();
+                        if (!matchText.includes(searchTerm)) return false;
+                    }
+
+                    if (car.price > maxPrice) return false;
+
+                    if (selectedBrands.length > 0 && !selectedBrands.includes(car.brand)) return false;
+                    if (selectedBodies.length > 0 && !selectedBodies.includes(car.bodyType)) return false;
+                    if (selectedFuels.length > 0) {
+                        const fuelMatch = selectedFuels.some(f => car.fuelType.toLowerCase().includes(f.toLowerCase()));
+                        if (!fuelMatch) return false;
+                    }
+
+                    return true;
+                });
+
+                // Sorting
+                const sortVal = sortSelect.value;
+                if (sortVal === 'price-asc') {
+                    filtered.sort((a, b) => a.price - b.price);
+                } else if (sortVal === 'price-desc') {
+                    filtered.sort((a, b) => b.price - a.price);
+                } else if (sortVal === 'hp-desc') {
+                    filtered.sort((a, b) => b.horsepower - a.horsepower);
+                } else if (sortVal === 'acc-asc') {
+                    filtered.sort((a, b) => parseFloat(a.zeroToSixty) - parseFloat(b.zeroToSixty));
+                }
+
+                resultsCount.textContent = `Showing ${filtered.length} ${isWishlistOnly ? 'Saved' : 'New'} Vehicles`;
+
+                if (filtered.length === 0) {
+                    carsGrid.innerHTML = `
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem;">
+                            <i class="fas fa-search" style="font-size: 3rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                            <h3>No vehicles match your criteria</h3>
+                            <p style="color: var(--accent); margin-bottom: 1.5rem;">Try adjusting your search terms or expanding filter limits.</p>
+                            <button class="btn btn-secondary" onclick="document.getElementById('btn-reset-filters').click()">Reset All Filters</button>
+                        </div>
+                    `;
+                    return;
+                }
+
+                carsGrid.innerHTML = filtered.map(car => {
+                    const inWishlist = wishlist.includes(car.id);
+                    const inCompare = compareList.includes(car.id);
+
+                    return `
+                        <div class="showroom-car-card">
+                            <div class="car-thumb-wrap">
+                                <img src="${car.image}" alt="${car.name}" loading="lazy">
+                                <div class="card-top-badges">
+                                    <span class="badge-tag">${car.status || 'IN STOCK'}</span>
+                                    <div style="display: flex; gap: 0.4rem;">
+                                        <button class="card-icon-btn ${inWishlist ? 'active' : ''}" data-wishlist="${car.id}" title="Wishlist">
+                                            <i class="${inWishlist ? 'fas' : 'far'} fa-heart"></i>
+                                        </button>
+                                        <button class="card-icon-btn ${inCompare ? 'active' : ''}" data-compare="${car.id}" title="Compare">
+                                            <i class="fas fa-columns"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="car-card-body">
+                                <div class="car-card-brand-row">
+                                    <span>${car.brand} · ${car.bodyType}</span>
+                                    <span>${car.year}</span>
+                                </div>
+                                <h3 class="car-card-title">${car.name}</h3>
+                                <div class="car-card-price-row">
+                                    <div class="car-price-msrp">$${car.price.toLocaleString()} MSRP</div>
+                                    <small style="color: var(--accent);">Est. $${Math.round(car.price / 72).toLocaleString()}/mo</small>
+                                </div>
+                                <div class="car-card-specs-row">
+                                    <div class="spec-item">
+                                        <small>0-60</small>
+                                        <strong>${car.zeroToSixty}</strong>
+                                    </div>
+                                    <div class="spec-item">
+                                        <small>POWER</small>
+                                        <strong>${car.horsepower} HP</strong>
+                                    </div>
+                                    <div class="spec-item">
+                                        <small>RANGE / MPG</small>
+                                        <strong style="font-size: 0.8rem;">${car.rangeOrMpg.split(' ')[0]}</strong>
+                                    </div>
+                                </div>
+                                <div class="car-card-actions">
+                                    <a href="car-details.html?id=${car.id}" class="btn">Configure & Buy</a>
+                                    <button class="btn btn-secondary btn-quick-td" data-id="${car.id}" data-name="${car.brand} ${car.name}">Test Drive</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                // Attach Card Listeners
+                carsGrid.querySelectorAll('[data-wishlist]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const carId = btn.getAttribute('data-wishlist');
+                        const res = window.carDB.toggleWishlist(carId);
+                        showToast(res.added ? 'Vehicle added to Saved Wishlist' : 'Removed from Wishlist', 'success');
+                    });
+                });
+
+                carsGrid.querySelectorAll('[data-compare]').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const carId = btn.getAttribute('data-compare');
+                        const res = window.carDB.toggleCompare(carId);
+                        if (res.error) {
+                            showToast(res.error, 'error');
+                        } else {
+                            showToast(res.added ? `Added to comparison (${res.total}/4)` : 'Removed from compare', 'info');
+                        }
+                    });
+                });
+
+                carsGrid.querySelectorAll('.btn-quick-td').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const carId = btn.getAttribute('data-id');
+                        const carName = btn.getAttribute('data-name');
+                        openQuickTestDrive(carId, carName);
+                    });
+                });
+            }
+
+            // Quick Test Drive Modal
+            const quickTdModal = document.getElementById('quick-td-modal');
+            function openQuickTestDrive(carId, carName) {
+                document.getElementById('modal-car-id').value = carId;
+                document.getElementById('modal-car-title').value = carName;
+                const curUser = window.authManager.getCurrentUser();
+                if (curUser) {
+                    document.getElementById('modal-cust-name').value = curUser.name;
+                    document.getElementById('modal-cust-email').value = curUser.email;
+                }
+                const tomorrow = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+                document.getElementById('modal-cust-date').value = tomorrow;
+                quickTdModal.classList.add('active');
+            }
+
+            document.getElementById('quick-td-form').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const booking = window.carDB.bookTestDrive({
+                    customerName: document.getElementById('modal-cust-name').value,
+                    customerEmail: document.getElementById('modal-cust-email').value,
+                    customerPhone: document.getElementById('modal-cust-phone').value,
+                    carId: document.getElementById('modal-car-id').value,
+                    carName: document.getElementById('modal-car-title').value,
+                    date: document.getElementById('modal-cust-date').value,
+                    time: document.getElementById('modal-cust-time').value,
+                    showroom: 'Wheels Downtown Flagship Showroom'
+                });
+
+                quickTdModal.classList.remove('active');
+                showToast(`VIP Test Drive booked successfully! ID #${booking.id}`, 'success');
             });
 
-            // Function to open filter sidebar
-            function openFilterSidebar() {
-                if (filterSidebar) {
-                    filterSidebar.classList.add('active');
-                }
-                if (filterOverlay) {
-                    filterOverlay.classList.add('active');
-                }
-                document.body.style.overflow = 'hidden';
-            }
+            // Listeners
+            searchInput.addEventListener('input', renderInventory);
+            sortSelect.addEventListener('change', renderInventory);
+            priceSlider.addEventListener('input', () => {
+                priceDisplay.textContent = '$' + parseInt(priceSlider.value).toLocaleString();
+                renderInventory();
+            });
 
-            // Function to close filter sidebar
-            function closeFilterSidebar() {
-                if (filterSidebar) {
-                    filterSidebar.classList.remove('active');
-                }
-                if (filterOverlay) {
-                    filterOverlay.classList.remove('active');
-                }
-                document.body.style.overflow = '';
-            }
+            document.querySelectorAll('#brand-filters input, #body-filters input, #fuel-filters input').forEach(cb => {
+                cb.addEventListener('change', renderInventory);
+            });
 
-            // Toggle filter sidebar on button click
-            if (filterToggle && filterSidebar) {
-                filterToggle.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    if (filterSidebar.classList.contains('active')) {
-                        closeFilterSidebar();
-                    } else {
-                        openFilterSidebar();
-                    }
-                });
-
-                // Also add touch event for mobile devices
-                filterToggle.addEventListener('touchend', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-
-                    if (filterSidebar.classList.contains('active')) {
-                        closeFilterSidebar();
-                    } else {
-                        openFilterSidebar();
-                    }
-                });
-            }
-
-            // Close filter sidebar when clicking overlay
-            if (filterOverlay) {
-                filterOverlay.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeFilterSidebar();
-                });
-            }
-
-            // Close button inside sidebar
-            const filterCloseBtn = document.getElementById('filterCloseBtn');
-            if (filterCloseBtn) {
-                filterCloseBtn.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeFilterSidebar();
-                });
-            }
-
-            // Close filter sidebar when clicking outside on mobile/tablet
-            document.addEventListener('click', function (e) {
-                if (window.innerWidth <= 1024) {
-                    if (filterSidebar && filterSidebar.classList.contains('active')) {
-                        // Check if click is outside sidebar and overlay
-                        if (!filterSidebar.contains(e.target) &&
-                            !filterOverlay.contains(e.target) &&
-                            !filterToggle.contains(e.target)) {
-                            closeFilterSidebar();
-                        }
-                    }
+            btnReset.addEventListener('click', () => {
+                searchInput.value = '';
+                sortSelect.value = 'featured';
+                priceSlider.value = 350000;
+                priceDisplay.textContent = '$350,000';
+                document.querySelectorAll('#brand-filters input, #body-filters input, #fuel-filters input').forEach(cb => cb.checked = false);
+                if (isWishlistOnly) {
+                    window.location.href = 'fleet.html';
+                } else {
+                    renderInventory();
                 }
             });
 
-            // Prevent sidebar from closing when clicking inside it
-            if (filterSidebar) {
-                filterSidebar.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                });
-            }
+            window.addEventListener('wheels-db-updated', renderInventory);
 
-            // Price Range Slider
-            const priceSlider = document.getElementById('priceSlider');
-            const priceOutput = document.getElementById('priceOutput');
-
-            if (priceSlider && priceOutput) {
-                priceSlider.addEventListener('input', function () {
-                    priceOutput.textContent = '$' + this.value + '/day';
-                });
-            }
-
-            // Filter Functionality
-            const applyFiltersBtn = document.getElementById('applyFilters');
-            const carsGrid = document.getElementById('carsGrid');
-            const carsCount = document.getElementById('carsCount');
-            const allCarCards = document.querySelectorAll('.car-card');
-
-            function filterCars() {
-                if (!priceSlider) return;
-
-                const selectedTypes = Array.from(document.querySelectorAll('input[name="car-type"]:checked')).map(cb => cb.value);
-                const selectedTransmissions = Array.from(document.querySelectorAll('input[name="transmission"]:checked')).map(cb => cb.value);
-                const selectedFuels = Array.from(document.querySelectorAll('input[name="fuel-type"]:checked')).map(cb => cb.value);
-                const selectedSeats = Array.from(document.querySelectorAll('input[name="seats"]:checked')).map(cb => cb.value);
-                const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked')).map(cb => cb.value);
-                const maxPrice = parseInt(priceSlider.value) || 200;
-
-                let visibleCount = 0;
-
-                allCarCards.forEach(card => {
-                    const cardType = card.dataset.type;
-                    const cardPrice = parseInt(card.dataset.price) || 0;
-                    const cardTransmission = card.dataset.transmission;
-                    const cardFuel = card.dataset.fuel;
-                    const cardSeats = card.dataset.seats;
-                    const cardFeatures = card.dataset.features ? card.dataset.features.split(',') : [];
-
-                    let show = true;
-
-                    // Check car type
-                    if (selectedTypes.length > 0 && !selectedTypes.includes(cardType)) {
-                        show = false;
-                    }
-
-                    // Check price
-                    if (cardPrice > maxPrice) {
-                        show = false;
-                    }
-
-                    // Check transmission
-                    if (selectedTransmissions.length > 0 && !selectedTransmissions.includes(cardTransmission)) {
-                        show = false;
-                    }
-
-                    // Check fuel type
-                    if (selectedFuels.length > 0 && !selectedFuels.includes(cardFuel)) {
-                        show = false;
-                    }
-
-                    // Check seats
-                    if (selectedSeats.length > 0 && !selectedSeats.includes(cardSeats)) {
-                        show = false;
-                    }
-
-                    // Check features
-                    if (selectedFeatures.length > 0) {
-                        const hasAllFeatures = selectedFeatures.every(feature => cardFeatures.includes(feature));
-                        if (!hasAllFeatures) {
-                            show = false;
-                        }
-                    }
-
-                    if (show) {
-                        card.style.display = '';
-                        visibleCount++;
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
-
-                if (carsCount) {
-                    carsCount.textContent = `Showing ${visibleCount} car${visibleCount !== 1 ? 's' : ''}`;
-                }
-
-                // Close filter sidebar on mobile/tablet after applying
-                if (window.innerWidth <= 1024 && filterSidebar && filterOverlay) {
-                    filterSidebar.classList.remove('active');
-                    filterOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            }
-
-            if (applyFiltersBtn) {
-                applyFiltersBtn.addEventListener('click', filterCars);
-            }
-
-            // Update count on page load
-            if (carsCount && allCarCards.length > 0) {
-                carsCount.textContent = `Showing ${allCarCards.length} cars`;
-            }
+            renderInventory();
         });
     </script>
 </body>

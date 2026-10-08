@@ -4,106 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locations - VELOCITY BLACK</title>
+    <title>Showroom Locations - WHEELS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
     <style>
         .page-header {
-            background: linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(220, 20, 60, 0.7) 100%), url('https://images.unsplash.com/photo-1524661135-423995f22d0b?w=1920&h=600&fit=crop') center/cover;
-            padding: 150px 2rem 80px;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.95) 0%, rgba(37, 99, 235, 0.75) 100%), url('https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=1920&fit=crop') center/cover;
+            padding: 140px 2rem 60px;
             text-align: center;
-            margin-top: 70px;
-        }
-
-        .location-search {
-            max-width: 600px;
-            margin: 2rem auto;
-        }
-
-        .location-search input {
-            width: 100%;
-            padding: 15px;
-            background: var(--subtle);
-            border: 2px solid var(--secondary);
-            color: var(--text);
-            font-size: 1.1rem;
-        }
-
-        .map-container {
-            width: 100%;
-            height: 500px;
-            background: var(--subtle);
-            border: 2px solid var(--secondary);
-            margin: 3rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent);
         }
 
         .location-card {
             background: var(--subtle);
-            padding: 2rem;
-            border-left: 4px solid var(--secondary);
-            margin-bottom: 2rem;
+            border: 1px solid var(--extra);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
             transition: all 0.3s ease;
         }
 
         .location-card:hover {
-            transform: translateX(10px);
-            box-shadow: 0 5px 20px rgba(220, 20, 60, 0.3);
-        }
-
-        .location-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 1rem;
-        }
-
-        .location-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .location-info-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--accent);
-        }
-
-        .location-filter {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 10px 20px;
-            background: var(--subtle);
-            border: 2px solid var(--extra);
-            color: var(--accent);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn.active {
-            background: var(--secondary);
-            color: var(--text);
             border-color: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 99, 235, 0.25);
         }
 
-        .airport-section {
-            background: var(--subtle);
-            padding: 3rem 2rem;
-            margin-top: 3rem;
+        .loc-img-wrap {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .loc-img-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .loc-content {
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .loc-content h3 {
+            font-size: 1.25rem;
+            text-align: left;
+            margin-bottom: 0.8rem;
+        }
+
+        .loc-detail-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            font-size: 0.88rem;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            text-align: left;
+        }
+
+        .loc-detail-row i {
+            color: var(--secondary);
+            margin-top: 3px;
         }
     </style>
 </head>
@@ -112,26 +77,17 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="logo">VELOCITY BLACK</a>
+            <a href="index.html" class="logo">WHEELS</a>
             <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="#" class="dropdown-toggle">Home <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Page</a></li>
-                        <li><a href="index2.html">Home Page 2</a></li>
-                    </ul>
-                </li>
-                <li><a href="fleet.html">Fleet</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="locations.html" class="active">Locations</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fleet.html">New Inventory</a></li>
+                <li><a href="services.html">Services & Financing</a></li>
+                <li><a href="locations.html" class="active">Showrooms</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="dashboard.html" class="btn btn-secondary"
-                    style="padding: 10px 20px; font-size: 0.9rem;">Dashboard</a>
-                <a href="login.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Login</a>
-                <a href="register.html" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Register</a>
+                <!-- Injected via auth.js / main.js -->
             </div>
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
         </div>
@@ -139,259 +95,204 @@
 
     <!-- PAGE HEADER -->
     <section class="page-header">
-        <h1>Our Locations</h1>
-        <div class="location-search">
-            <input type="text" placeholder="Search by city or airport...">
-        </div>
-    </section>
-
-    <!-- INTERACTIVE MAP -->
-    <section class="section">
-        <div class="map-container">
-            <div style="text-align: center;">
-                <i class="fas fa-map-marked-alt"
-                    style="font-size: 4rem; margin-bottom: 1rem; color: var(--secondary);"></i>
-                <p style="font-size: 1.2rem;">Interactive Map</p>
-                <p style="color: var(--accent); margin-top: 0.5rem;">Click on markers to view location details</p>
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h1 style="font-size: 2.8rem; margin-bottom: 0.5rem;">FLAGSHIP SHOWROOM GALLERIES</h1>
+            <p style="color: var(--accent); max-width: 700px; margin: 0 auto; font-size: 1.05rem;">
+                Step inside our state-of-the-art vehicle galleries. Experience private VIP configurator studios and dedicated track delivery suites.
+            </p>
+            <div style="margin-top: 1.5rem;">
+                <button type="button" class="btn btn-secondary trigger-city-modal" style="padding: 10px 24px; font-size: 0.9rem;">
+                    <i class="fas fa-map-marker-alt"></i> Change Selected City (<span id="loc-page-city">Mumbai</span>)
+                </button>
             </div>
         </div>
     </section>
 
-    <!-- LOCATION FILTERS -->
-    <section class="section">
-        <div class="location-filter">
-            <button class="filter-btn active">All Locations</button>
-            <button class="filter-btn">City</button>
-            <button class="filter-btn">Airport</button>
-            <button class="filter-btn">Downtown</button>
-        </div>
+    <!-- LOCATIONS GRID -->
+    <section class="section" style="padding: 70px 0; background: var(--primary);">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2rem;">
+                <!-- Mumbai -->
+                <div class="location-card">
+                    <div class="loc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1542282088-72c9c27ed0cd?w=800&fit=crop" alt="Mumbai Showroom">
+                    </div>
+                    <div class="loc-content">
+                        <h3>Wheels Mumbai Flagship Gallery</h3>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Bandra-Kurla Complex (BKC), G-Block, Bandra East, Mumbai, Maharashtra 400051</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 (022) 5550-1920 / +91 98200-99881</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Sat: 9:30 AM - 8:30 PM | Sun: VIP Appointment</span>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 1rem;">
+                            <a href="fleet.html" class="btn" style="width: 100%;">Book Test Drive Here</a>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- LOCATION CARDS -->
-        <div class="grid grid-2">
-            <div class="location-card">
-                <div class="location-header">
-                    <div>
-                        <h3>Downtown Office</h3>
-                        <p style="color: var(--accent); margin-top: 0.5rem;">Main Headquarters</p>
+                <!-- Delhi NCR -->
+                <div class="location-card">
+                    <div class="loc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&fit=crop" alt="Delhi Showroom">
                     </div>
-                    <span class="car-card-category">City</span>
-                </div>
-                <div
-                    style="width: 100%; height: 200px; background: var(--extra); margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-building" style="font-size: 3rem; color: var(--accent);"></i>
-                </div>
-                <div class="location-info">
-                    <div class="location-info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>123 Speed Avenue, City, State </span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4567</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Open 24/7</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-car"></i>
-                        <span>150+ cars available</span>
+                    <div class="loc-content">
+                        <h3>Wheels Delhi Aerocity Supercenter</h3>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Worldmark 1, Aerocity Hospitality District, New Delhi 110037</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 (011) 4560-8800</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Sat: 10:00 AM - 8:00 PM | Sun: 11:00 AM - 6:00 PM</span>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 1rem;">
+                            <a href="fleet.html" class="btn" style="width: 100%;">Book Test Drive Here</a>
+                        </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Get Directions</a>
-            </div>
 
-            <div class="location-card">
-                <div class="location-header">
-                    <div>
-                        <h3>Airport Terminal</h3>
-                        <p style="color: var(--accent); margin-top: 0.5rem;">International Airport</p>
+                <!-- Ahmedabad -->
+                <div class="location-card">
+                    <div class="loc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?w=800&fit=crop" alt="Ahmedabad Showroom">
                     </div>
-                    <span class="car-card-category">Airport</span>
-                </div>
-                <div
-                    style="width: 100%; height: 200px; background: var(--extra); margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-plane" style="font-size: 3rem; color: var(--accent);"></i>
-                </div>
-                <div class="location-info">
-                    <div class="location-info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Airport Terminal 1, Gate A12</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4568</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Open 24/7</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-car"></i>
-                        <span>80+ cars available</span>
+                    <div class="loc-content">
+                        <h3>Wheels Ahmedabad SG Highway Center</h3>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>S.G. Highway, Near Thaltej Cross Roads, Bodakdev, Ahmedabad 380054</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 (079) 6780-4422</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Sun: 9:30 AM - 8:00 PM</span>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 1rem;">
+                            <a href="fleet.html" class="btn" style="width: 100%;">Book Test Drive Here</a>
+                        </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Get Directions</a>
-            </div>
 
-            <div class="location-card">
-                <div class="location-header">
-                    <div>
-                        <h3>Train Station</h3>
-                        <p style="color: var(--accent); margin-top: 0.5rem;">Central Station</p>
+                <!-- Bengaluru -->
+                <div class="location-card">
+                    <div class="loc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1617788138017-80ad40651399?w=800&fit=crop" alt="Bengaluru Tech Center">
                     </div>
-                    <span class="car-card-category">City</span>
-                </div>
-                <div
-                    style="width: 100%; height: 200px; background: var(--extra); margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-train" style="font-size: 3rem; color: var(--accent);"></i>
-                </div>
-                <div class="location-info">
-                    <div class="location-info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>456 Station Road, City Center</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4569</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Mon-Sun: 6AM-10PM</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-car"></i>
-                        <span>60+ cars available</span>
+                    <div class="loc-content">
+                        <h3>Wheels Bengaluru Indiranagar Suite</h3>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>100 Feet Road, HAL 2nd Stage, Indiranagar, Bengaluru 560038</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 (080) 4120-7733</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Sun: 10:00 AM - 8:30 PM</span>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 1rem;">
+                            <a href="fleet.html" class="btn" style="width: 100%;">Book Test Drive Here</a>
+                        </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Get Directions</a>
-            </div>
 
-            <div class="location-card">
-                <div class="location-header">
-                    <div>
-                        <h3>Business Office</h3>
-                        <p style="color: var(--accent); margin-top: 0.5rem;">Financial Center</p>
+                <!-- Surat -->
+                <div class="location-card">
+                    <div class="loc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&fit=crop" alt="Surat Showroom">
                     </div>
-                    <span class="car-card-category">Downtown</span>
-                </div>
-                <div
-                    style="width: 100%; height: 200px; background: var(--extra); margin: 1rem 0; display: flex; align-items: center; justify-content: center;">
-                    <i class="fas fa-briefcase" style="font-size: 3rem; color: var(--accent);"></i>
-                </div>
-                <div class="location-info">
-                    <div class="location-info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>789 Business Blvd, Suite 100</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-phone"></i>
-                        <span>+1 (555) 123-4570</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-clock"></i>
-                        <span>Mon-Fri: 7AM-8PM</span>
-                    </div>
-                    <div class="location-info-item">
-                        <i class="fas fa-car"></i>
-                        <span>90+ cars available</span>
+                    <div class="loc-content">
+                        <h3>Wheels Surat Dumas Road Experience Studio</h3>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Dumas Road, Piplod, Near VIP Road Junction, Surat 395007</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 (0261) 2250-990</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Sat: 9:30 AM - 8:00 PM</span>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 1rem;">
+                            <a href="fleet.html" class="btn" style="width: 100%;">Book Test Drive Here</a>
+                        </div>
                     </div>
                 </div>
-                <a href="#" class="btn btn-secondary" style="margin-top: 1.5rem; width: 100%;">Get Directions</a>
-            </div>
-        </div>
-    </section>
 
-    <!-- AIRPORT LOCATIONS -->
-    <section class="airport-section">
-        <div style="max-width: 1400px; margin: 0 auto;">
-            <div class="section-title">
-                <h2>Airport Pickup Instructions</h2>
-            </div>
-            <div class="grid grid-2">
-                <div class="card">
-                    <h3><i class="fas fa-info-circle" style="color: var(--secondary); margin-right: 0.5rem;"></i>Pickup
-                        Process</h3>
-                    <ol style="padding-left: 1.5rem; color: var(--accent);">
-                        <li style="margin-bottom: 0.8rem;">After collecting your luggage, proceed to the arrivals area
-                        </li>
-                        <li style="margin-bottom: 0.8rem;">Call our airport location: +1 (555) 123-4568</li>
-                        <li style="margin-bottom: 0.8rem;">Our representative will meet you at the designated pickup
-                            point</li>
-                        <li style="margin-bottom: 0.8rem;">Complete the rental agreement and vehicle inspection</li>
-                        <li style="margin-bottom: 0.8rem;">You're ready to hit the road!</li>
-                    </ol>
-                </div>
-                <div class="card">
-                    <h3><i class="fas fa-map-marked-alt"
-                            style="color: var(--secondary); margin-right: 0.5rem;"></i>Terminal Information</h3>
-                    <p><strong>Terminal 1:</strong> Gate A12 - Main pickup point</p>
-                    <p><strong>Terminal 2:</strong> Gate B5 - Secondary pickup point</p>
-                    <p><strong>Terminal 3:</strong> Gate C8 - Available on request</p>
-                    <p style="margin-top: 1rem; color: var(--accent);">Our vehicles are clearly marked with VELOCITY
-                        BLACK branding. Look for our red and chrome signage.</p>
+                <!-- Hyderabad -->
+                <div class="location-card">
+                    <div class="loc-img-wrap">
+                        <img src="https://images.unsplash.com/photo-1563720223185-11003d516935?w=800&fit=crop" alt="Hyderabad Showroom">
+                    </div>
+                    <div class="loc-content">
+                        <h3>Wheels Hyderabad Jubilee Hills Pavilion</h3>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Road No. 36, Jubilee Hills, Hyderabad 500033</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-phone-alt"></i>
+                            <span>+91 (040) 2350-1122</span>
+                        </div>
+                        <div class="loc-detail-row">
+                            <i class="fas fa-clock"></i>
+                            <span>Mon - Sun: 10:00 AM - 8:00 PM</span>
+                        </div>
+                        <div style="margin-top: auto; padding-top: 1rem;">
+                            <a href="fleet.html" class="btn" style="width: 100%;">Book Test Drive Here</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer carbon-fiber">
-        <div class="footer-content">
-            <div class="footer-section">
-                <a href="index.html" class="logo">VELOCITY BLACK</a>
-                <p>Premium car rental service for your every journey. Experience luxury, reliability, and exceptional
-                    service.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+    <footer class="footer" style="padding: 60px 0 30px; background: #08080a; border-top: 1px solid var(--extra);">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <a href="index.html" class="logo" style="font-size: 1.5rem; display: inline-block; margin-bottom: 1rem;">WHEELS</a>
+            <p style="color: var(--accent); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem;">
+                Official Authorized Showroom for Brand New Luxury & High-Performance Vehicles.
+            </p>
+            <div style="color: var(--accent); font-size: 0.8rem;">
+                © 2026 WHEELS LLC. All rights reserved.
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="locations.html">Locations</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Car Categories</h3>
-                <ul>
-                    <li><a href="fleet.html">Economy</a></li>
-                    <li><a href="fleet.html">Compact</a></li>
-                    <li><a href="fleet.html">Sedan</a></li>
-                    <li><a href="fleet.html">SUV</a></li>
-                    <li><a href="fleet.html">Luxury</a></li>
-                    <li><a href="fleet.html">Sports</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul>
-                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> info@velocityblack.com</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Speed Avenue, City, State 12345</li>
-                    <li><i class="fas fa-clock"></i> Open 24/7</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 VELOCITY BLACK. All rights reserved. | <a href="#" style="color: var(--accent);">Privacy
-                    Policy</a> | <a href="#" style="color: var(--accent);">Terms of Service</a></p>
         </div>
     </footer>
 
-    <button class="back-to-top" aria-label="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+    <!-- SCRIPTS -->
+    <script src="js/car-db.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            function updateLocCity() {
+                const city = localStorage.getItem('wheels_selected_city') || 'Mumbai';
+                const el = document.getElementById('loc-page-city');
+                if (el) el.textContent = city;
+            }
+            window.addEventListener('wheels-city-changed', updateLocCity);
+            updateLocCity();
+        });
+    </script>
 </body>
 
 </html>

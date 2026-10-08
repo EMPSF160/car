@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VELOCITY BLACK - Premium Car Rental</title>
+    <title>WHEELS - 2026 Premier Vehicle Marketplace</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon"
@@ -12,506 +12,282 @@
 </head>
 
 <body>
-    <!-- NAVBAR -->
+    <!-- TOP UTILITY BAR -->
+    <div class="top-utility-bar">
+        <div class="utility-container">
+            <div class="utility-left">
+                <a href="javascript:void(0)" class="utility-link trigger-city-modal" title="Change Location">
+                    <i class="fas fa-map-marker-alt" style="color: #38bdf8;"></i>
+                    <span>Select City: <strong id="topbar-city" style="color: #ffffff;">Mumbai</strong></span>
+                    <i class="fas fa-chevron-down" style="font-size: 0.65rem;"></i>
+                </a>
+            </div>
+            <div class="utility-right">
+                <a href="contact.html" class="utility-link">
+                    <i class="fas fa-phone-alt"></i> Request a callback
+                </a>
+                <a href="dashboard.html" class="utility-link highlight">
+                    <i class="fas fa-external-link-alt"></i> Dealer CRM / Portal
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="logo">VELOCITY BLACK</a>
-            <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="#" class="dropdown-toggle">Home <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html" class="active">Home Page</a></li>
-                        <li><a href="index2.html">Home Page 2</a></li>
-                    </ul>
-                </li>
-                <li><a href="fleet.html">Fleet</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="locations.html">Locations</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
-            <div class="nav-icons">
-                <a href="dashboard.html" class="btn btn-secondary"
-                    style="padding: 10px 20px; font-size: 0.9rem;">Dashboard</a>
-                <a href="login.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Login</a>
-                <a href="register.html" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Register</a>
+            <!-- Brand Logo -->
+            <a href="index.html" class="logo">WHEELS</a>
+
+            <!-- Center Search Bar -->
+            <div class="nav-center-search">
+                <i class="fas fa-search" style="color: var(--accent); font-size: 0.9rem;"></i>
+                <input type="text" id="top-nav-search-input" placeholder="Search cars by brand, model, price...">
+                <button type="button" class="nav-search-btn" id="top-nav-search-btn">Search</button>
             </div>
+
+            <!-- Right Nav Icons / Auth -->
+            <div class="nav-icons">
+                <!-- Dynamically Injected via auth.js / main.js -->
+            </div>
+
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <video class="hero-video" autoplay muted loop playsinline>
-            <source src="https://videos.pexels.com/video-files/3045163/3045163-hd_1920_1080_30fps.mp4" type="video/mp4">
-        </video>
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <div class="booking-widget">
-                <form class="booking-form">
-                    <div class="form-group">
-                        <label for="pickup-location">Pick-up Location</label>
-                        <select id="pickup-location" required>
-                            <option value="">Select Location</option>
-                            <option value="airport">Airport</option>
-                            <option value="downtown">Downtown</option>
-                            <option value="station">Train Station</option>
-                        </select>
+    <!-- SUB-NAVBAR LINKS BAR -->
+    <div class="subnav-bar">
+        <ul class="subnav-links">
+            <li><a href="fleet.html" class="active">Buy New Car</a></li>
+            <li><a href="fleet.html">Explore Showroom</a></li>
+            <li><a href="car-details.html?id=car-taycan-gt-2026#finance-section">Car Finance & EMI</a></li>
+            <li><a href="services.html">Trade-In & Valuation</a></li>
+            <li><a href="locations.html">Showrooms & Test Drive</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+
+    <!-- SPLIT HERO SECTION -->
+    <section class="hero-split-section">
+        <div class="hero-split-container">
+            <!-- Left Text Column -->
+            <div class="hero-text-col">
+                <div class="hero-badge-tag">
+                    <i class="fas fa-car-side"></i> 2026 Vehicle Marketplace
+                </div>
+                <h1 class="hero-headline-main">
+                    Find Your Dream Car <br>
+                    <span class="highlight-text">Instantly.</span>
+                </h1>
+                <div class="hero-sub-title">Get the best factory price from 500+ verified dealers.</div>
+                <p class="hero-desc-para">
+                    Free doorstep inspection & test drive by certified specialists. We handle all documentation, custom factory build allocations, and provide secure escrow token payments.
+                </p>
+
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="fleet.html" class="hero-cta-btn">
+                        Explore New Cars <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="locations.html" class="btn btn-secondary" style="padding: 16px 28px; border-radius: 35px; font-size: 0.95rem;">
+                        <i class="fas fa-calendar-check"></i> Book VIP Test Drive
+                    </a>
+                </div>
+
+                <!-- Checklist Badges -->
+                <div class="hero-checklist-row">
+                    <div class="hero-check-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Free Doorstep Inspection</span>
                     </div>
-                    <div class="form-group">
-                        <label for="dropoff-location">Drop-off Location</label>
-                        <select id="dropoff-location" required>
-                            <option value="">Select Location</option>
-                            <option value="airport">Airport</option>
-                            <option value="downtown">Downtown</option>
-                            <option value="station">Train Station</option>
-                        </select>
+                    <div class="hero-check-item">
+                        <i class="fas fa-users"></i>
+                        <span>500+ Verified Dealers</span>
                     </div>
-                    <div class="form-group">
-                        <label for="pickup-date">Pick-up Date & Time</label>
-                        <input type="datetime-local" id="pickup-date" required>
+                    <div class="hero-check-item">
+                        <i class="fas fa-bolt"></i>
+                        <span>0% APR Financing</span>
                     </div>
-                    <div class="form-group">
-                        <label for="return-date">Return Date & Time</label>
-                        <input type="datetime-local" id="return-date" required>
-                    </div>
-                    <div class="form-group" style="grid-column: 1 / -1;">
-                        <button type="submit" class="btn" style="width: 100%;">Search Cars</button>
-                    </div>
-                </form>
-                <div class="trust-badges">
-                    <div class="trust-badge">
-                        <i class="fas fa-headset"></i>
-                        <span>24/7 Support</span>
-                    </div>
-                    <div class="trust-badge">
-                        <i class="fas fa-dollar-sign"></i>
-                        <span>Best Prices</span>
-                    </div>
-                    <div class="trust-badge">
+                    <div class="hero-check-item">
                         <i class="fas fa-check-circle"></i>
-                        <span>Easy Booking</span>
+                        <span>5-Yr Factory Warranty</span>
                     </div>
+                </div>
+            </div>
+
+            <!-- Right 3D Vehicle Showcase Column -->
+            <div class="hero-image-col">
+                <div class="hero-car-stage">
+                    <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&w=1200&q=80" alt="2026 Flagship Showcase Car" id="hero-display-car-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="section">
-        <div class="section-title">
-            <h2>How It Works</h2>
-        </div>
-        <div class="grid grid-3">
-            <div class="card text-center">
-                <i class="fas fa-car" style="font-size: 3rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Choose Your Car</h3>
-                <p>Browse our extensive fleet of premium vehicles. From economy to luxury, find the perfect car for your
-                    journey.</p>
+    <!-- FEATURED VEHICLE SHOWCASE -->
+    <section class="section" style="padding: 70px 0; background: var(--subtle);">
+        <div class="container" style="max-width: 1350px; margin: 0 auto; padding: 0 1.5rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 2.5rem; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <span style="color: var(--secondary); font-family: var(--font-accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-size: 0.85rem;">2026 Flagship Showcase</span>
+                    <h2 style="text-align: left; margin: 4px 0 0; font-size: 2.2rem;">Featured New Vehicles</h2>
+                </div>
+                <a href="fleet.html" class="btn btn-secondary" style="padding: 10px 22px; font-size: 0.9rem;">
+                    View All Inventory <i class="fas fa-arrow-right" style="margin-left: 6px;"></i>
+                </a>
             </div>
-            <div class="card text-center">
-                <i class="fas fa-calendar-check" style="font-size: 3rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Book Online</h3>
-                <p>Complete your reservation in minutes with our easy-to-use booking system. Secure your car with
-                    instant confirmation.</p>
-            </div>
-            <div class="card text-center">
-                <i class="fas fa-road" style="font-size: 3rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Hit The Road</h3>
-                <p>Pick up your vehicle and start your adventure. We're here to support you every mile of the way.</p>
+
+            <!-- Cars Cards Grid -->
+            <div class="grid grid-3" id="home-featured-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem;">
+                <!-- Injected via car-db.js -->
             </div>
         </div>
     </section>
 
-    <!-- FEATURED CARS -->
-    <section class="section" style="background: var(--subtle);">
-        <div class="section-title">
-            <h2>Popular Rentals</h2>
-        </div>
-        <div class="grid grid-3">
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=800&h=600&fit=crop"
-                        alt="Luxury Sedan">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Mercedes-Benz E-Class</h3>
-                    <span class="car-card-category">Luxury</span>
-                    <div class="car-card-price">$89/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 5 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
+    <!-- WHY PURCHASE WITH US -->
+    <section class="section" style="padding: 80px 0; background: var(--primary);">
+        <div class="container" style="max-width: 1350px; margin: 0 auto; padding: 0 1.5rem;">
+            <div style="text-align: center; max-width: 700px; margin: 0 auto 3rem;">
+                <span style="color: var(--secondary); font-family: var(--font-accent); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; font-size: 0.85rem;">The Wheels Advantage</span>
+                <h2 style="margin: 6px 0 0.8rem; font-size: 2.2rem;">Why Purchase With Us</h2>
+                <p style="color: var(--accent);">Experience a transparent, pressure-free buying journey with white-glove VIP concierge services from order to delivery.</p>
             </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=800&h=600&fit=crop"
-                        alt="Sports Car">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">BMW M4 Coupe</h3>
-                    <span class="car-card-category">Sports</span>
-                    <div class="car-card-price">$129/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 4 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=800&h=600&fit=crop"
-                        alt="SUV">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Range Rover Sport</h3>
-                    <span class="car-card-category">SUV</span>
-                    <div class="car-card-price">$109/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 7 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-gas-pump"></i> Diesel</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=800&h=600&fit=crop"
-                        alt="Sedan">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Audi A6</h3>
-                    <span class="car-card-category">Sedan</span>
-                    <div class="car-card-price">$79/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 5 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1555215695-3004980ad54e?w=800&h=600&fit=crop"
-                        alt="Compact">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Toyota Corolla</h3>
-                    <span class="car-card-category">Compact</span>
-                    <div class="car-card-price">$45/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 5 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-gas-pump"></i> Hybrid</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1550355291-bbee04a92027?w=800&h=600&fit=crop"
-                        alt="Economy">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Honda Civic</h3>
-                    <span class="car-card-category">Economy</span>
-                    <div class="car-card-price">$39/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 5 Seats</span>
-                        <span><i class="fas fa-cog"></i> Manual</span>
-                        <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&h=600&fit=crop"
-                        alt="Luxury SUV">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Porsche Cayenne</h3>
-                    <span class="car-card-category">Luxury SUV</span>
-                    <div class="car-card-price">$149/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 5 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-gas-pump"></i> Petrol</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="car-card">
-                <div class="car-card-image">
-                    <img src="https://cdn.motor1.com/images/mgl/rK4wRO/s1/2024-tesla-model-3-highland.jpg"
-                        alt="Electric">
-                </div>
-                <div class="car-card-content">
-                    <h3 class="car-card-title">Tesla Model 3</h3>
-                    <span class="car-card-category">Electric</span>
-                    <div class="car-card-price">$99/day</div>
-                    <div class="car-card-features">
-                        <span><i class="fas fa-users"></i> 5 Seats</span>
-                        <span><i class="fas fa-cog"></i> Auto</span>
-                        <span><i class="fas fa-bolt"></i> Electric</span>
-                    </div>
-                    <div class="car-card-actions">
-                        <a href="car-details.html" class="btn btn-secondary" style="flex: 1;">View Details</a>
-                        <a href="fleet.html" class="btn" style="flex: 1;">Book Now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="text-center mt-3">
-            <a href="fleet.html" class="btn">View All Cars</a>
-        </div>
-    </section>
 
-    <!-- WHY CHOOSE US -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Why Choose Us</h2>
-        </div>
-        <div class="grid grid-4">
-            <div class="card text-center">
-                <i class="fas fa-tag" style="font-size: 2.5rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Best Price Guarantee</h3>
-                <p>We guarantee the best rates. Find a lower price? We'll match it.</p>
-            </div>
-            <div class="card text-center">
-                <i class="fas fa-headset" style="font-size: 2.5rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>24/7 Customer Support</h3>
-                <p>Round-the-clock assistance whenever you need help on the road.</p>
-            </div>
-            <div class="card text-center">
-                <i class="fas fa-mobile-alt" style="font-size: 2.5rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Easy Booking Process</h3>
-                <p>Book in minutes with our streamlined online reservation system.</p>
-            </div>
-            <div class="card text-center">
-                <i class="fas fa-car-side" style="font-size: 2.5rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Wide Selection</h3>
-                <p>Choose from hundreds of vehicles across all categories.</p>
-            </div>
-            <div class="card text-center">
-                <i class="fas fa-shield-alt" style="font-size: 2.5rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Fully Insured</h3>
-                <p>Comprehensive insurance coverage included with every rental for your peace of mind.</p>
-            </div>
-            <div class="card text-center">
-                <i class="fas fa-clock" style="font-size: 2.5rem; color: #DC143C; margin-bottom: 1rem;"></i>
-                <h3>Quick Pickup</h3>
-                <p>Fast and efficient vehicle pickup process. Get on the road in minutes, not hours.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SPECIAL OFFERS -->
-    <section class="section" style="background: var(--subtle);">
-        <div class="section-title">
-            <h2>Special Offers</h2>
-        </div>
-        <div class="grid grid-2">
-            <div class="card"
-                style="background: linear-gradient(135deg, var(--secondary) 0%, var(--highlight) 100%); padding: 3rem; text-align: center;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">Weekend Special</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center;">Get 20% off on weekend rentals.
-                    Book now and save!</p>
-                <a href="fleet.html" class="btn"
-                    style="background: var(--primary); color: var(--text); display: inline-block; margin: 0 auto;">Book
-                    Now</a>
-            </div>
-            <div class="card"
-                style="background: linear-gradient(135deg, var(--highlight) 0%, var(--secondary) 100%); padding: 3rem; text-align: center;">
-                <h3 style="font-size: 2rem; margin-bottom: 1rem; text-align: center;">Long-Term Rental</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 1.5rem; text-align: center;">Rent for 7+ days and 30%
-                    discount on your entire booking.</p>
-                <a href="services.html" class="btn"
-                    style="background: var(--primary); color: var(--text); display: inline-block; margin: 0 auto;">Learn
-                    More</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="section">
-        <div class="section-title">
-            <h2>What Our Customers Say</h2>
-        </div>
-        <div class="grid grid-3">
-            <div class="card">
-                <div
-                    style="color: #FFD700; margin-bottom: 1rem; text-align: center; display: flex; justify-content: center; gap: 0.3rem;">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem;">
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-tags"></i></div>
+                    <h3>Transparent MSRP Pricing</h3>
+                    <p>Direct manufacturer allocation without arbitrary dealer markups or hidden add-on fees.</p>
                 </div>
-                <p>"Excellent service and premium vehicles. The booking process was seamless and the car was in perfect
-                    condition."</p>
-                <div
-                    style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center;">
-                    <div
-                        style="width: 50px; height: 50px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; color: var(--text); font-weight: bold;">
-                        JD</div>
-                    <div style="text-align: center;">
-                        <strong style="display: block; text-align: center;">John Doe</strong>
-                        <div style="color: var(--accent); font-size: 0.9rem; text-align: center;">Verified Customer
-                        </div>
-                    </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-percentage"></i></div>
+                    <h3>0% APR Financing & Lease</h3>
+                    <p>Exclusive institutional financing rates and flexible lease terms tailored to your portfolio.</p>
                 </div>
-            </div>
-            <div class="card">
-                <div
-                    style="color: #FFD700; margin-bottom: 1rem; text-align: center; display: flex; justify-content: center; gap: 0.3rem;">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-truck"></i></div>
+                    <h3>White-Glove VIP Delivery</h3>
+                    <p>Enclosed carrier transport delivered directly to your driveway with personalized handover.</p>
                 </div>
-                <p>"Best car rental experience ever! Great prices, friendly staff, and the car exceeded my
-                    expectations."</p>
-                <div
-                    style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center;">
-                    <div
-                        style="width: 50px; height: 50px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; color: var(--text); font-weight: bold;">
-                        SM</div>
-                    <div style="text-align: center;">
-                        <strong style="display: block; text-align: center;">Sarah Miller</strong>
-                        <div style="color: var(--accent); font-size: 0.9rem; text-align: center;">Verified Customer
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card">
-                <div
-                    style="color: #FFD700; margin-bottom: 1rem; text-align: center; display: flex; justify-content: center; gap: 0.3rem;">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                </div>
-                <p>"Professional service from start to finish. The online booking was easy and pickup was quick. Highly
-                    recommended!"</p>
-                <div
-                    style="margin-top: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; text-align: center;">
-                    <div
-                        style="width: 50px; height: 50px; border-radius: 50%; background: var(--secondary); display: flex; align-items: center; justify-content: center; color: var(--text); font-weight: bold;">
-                        MJ</div>
-                    <div style="text-align: center;">
-                        <strong style="display: block; text-align: center;">Mike Johnson</strong>
-                        <div style="color: var(--accent); font-size: 0.9rem; text-align: center;">Verified Customer
-                        </div>
-                    </div>
+                <div class="pillar-card">
+                    <div class="pillar-icon"><i class="fas fa-exchange-alt"></i></div>
+                    <h3>Guaranteed Trade-In Value</h3>
+                    <p>Instant competitive appraisals for your current exotic or luxury vehicle against your new build.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PARTNERS/BRANDS -->
-    <section class="section" style="background: var(--subtle);">
-        <div class="section-title">
-            <h2>Our Partners</h2>
-        </div>
-        <div class="partners-container">
-            <div class="partner-brand">MERCEDES</div>
-            <div class="partner-brand">BMW</div>
-            <div class="partner-brand">AUDI</div>
-            <div class="partner-brand">TOYOTA</div>
-            <div class="partner-brand">HONDA</div>
-            <div class="partner-brand">FORD</div>
-        </div>
-    </section>
+    <!-- FLOATING WHATSAPP CONCIERGE -->
+    <a href="https://wa.me/18005550199" target="_blank" rel="noopener noreferrer" class="floating-whatsapp-btn" title="Chat with VIP Concierge on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
 
     <!-- FOOTER -->
-    <footer class="footer carbon-fiber">
-        <div class="footer-content">
-            <div class="footer-section">
-                <a href="index.html" class="logo">VELOCITY BLACK</a>
-                <p>Premium car rental service for your every journey. Experience luxury, reliability, and exceptional
-                    service.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+    <footer class="footer" style="padding: 60px 0 30px; background: #08080a; border-top: 1px solid var(--extra);">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <a href="index.html" class="logo" style="font-size: 1.5rem; display: inline-block; margin-bottom: 1rem;">WHEELS</a>
+            <p style="color: var(--accent); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem;">
+                Official Authorized Showroom for Brand New Luxury & High-Performance Vehicles.
+            </p>
+            <div style="color: var(--accent); font-size: 0.8rem;">
+                © 2026 WHEELS LLC. All rights reserved.
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="locations.html">Locations</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Car Categories</h3>
-                <ul>
-                    <li><a href="fleet.html">Economy</a></li>
-                    <li><a href="fleet.html">Compact</a></li>
-                    <li><a href="fleet.html">Sedan</a></li>
-                    <li><a href="fleet.html">SUV</a></li>
-                    <li><a href="fleet.html">Luxury</a></li>
-                    <li><a href="fleet.html">Sports</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul>
-                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> info@velocityblack.com</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Speed Avenue, City, State 12345</li>
-                    <li><i class="fas fa-clock"></i> Open 24/7</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 VELOCITY BLACK. All rights reserved. | <a href="#" style="color: var(--accent);">Privacy
-                    Policy</a> | <a href="#" style="color: var(--accent);">Terms of Service</a></p>
         </div>
     </footer>
 
-    <!-- BACK TO TOP BUTTON -->
-    <button class="back-to-top" aria-label="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+    <!-- SCRIPTS -->
+    <script src="js/car-db.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Update Topbar city
+            function syncCity() {
+                const currentCity = localStorage.getItem('wheels_selected_city') || 'Mumbai';
+                const el = document.getElementById('topbar-city');
+                if (el) el.textContent = currentCity;
+            }
+            window.addEventListener('wheels-city-changed', syncCity);
+            syncCity();
+
+            // Search Trigger in Top Nav
+            const searchInput = document.getElementById('top-nav-search-input');
+            const searchBtn = document.getElementById('top-nav-search-btn');
+            function executeSearch() {
+                const q = searchInput.value.trim();
+                if (q) {
+                    window.location.href = `fleet.html?search=${encodeURIComponent(q)}`;
+                } else {
+                    window.location.href = 'fleet.html';
+                }
+            }
+            if (searchBtn && searchInput) {
+                searchBtn.addEventListener('click', executeSearch);
+                searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') executeSearch();
+                });
+            }
+
+            // Render Featured Cars
+            const featuredGrid = document.getElementById('home-featured-grid');
+            const cars = window.carDB.getAllCars().slice(0, 6);
+            const wishlist = window.carDB.getWishlist();
+            const compareList = window.carDB.getCompareList();
+
+            featuredGrid.innerHTML = cars.map(car => {
+                const inWishlist = wishlist.includes(car.id);
+                const inCompare = compareList.includes(car.id);
+
+                return `
+                    <div class="showroom-car-card">
+                        <div class="car-thumb-wrap">
+                            <img src="${car.image}" alt="${car.name}" loading="lazy">
+                            <div class="card-top-badges">
+                                <span class="badge-tag">${car.status || 'IN STOCK'}</span>
+                                <div style="display: flex; gap: 0.4rem;">
+                                    <button class="card-icon-btn ${inWishlist ? 'active' : ''}" onclick="event.preventDefault(); window.carDB.toggleWishlist('${car.id}'); showToast('Updated wishlist', 'success');" title="Wishlist">
+                                        <i class="${inWishlist ? 'fas' : 'far'} fa-heart"></i>
+                                    </button>
+                                    <button class="card-icon-btn ${inCompare ? 'active' : ''}" onclick="event.preventDefault(); const res = window.carDB.toggleCompare('${car.id}'); showToast(res.added ? 'Added to compare' : 'Removed from compare', 'info');" title="Compare">
+                                        <i class="fas fa-columns"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="car-card-body">
+                            <div class="car-card-brand-row">
+                                <span>${car.brand} · ${car.bodyType}</span>
+                                <span>${car.year}</span>
+                            </div>
+                            <h3 class="car-card-title">${car.name}</h3>
+                            <div class="car-card-price-row">
+                                <div class="car-price-msrp">$${car.price.toLocaleString()} MSRP</div>
+                                <small style="color: var(--accent);">Est. $${Math.round(car.price / 72).toLocaleString()}/mo</small>
+                            </div>
+                            <div class="car-card-specs-row">
+                                <div class="spec-item">
+                                    <small>0-60</small>
+                                    <strong>${car.zeroToSixty}</strong>
+                                </div>
+                                <div class="spec-item">
+                                    <small>POWER</small>
+                                    <strong>${car.horsepower} HP</strong>
+                                </div>
+                                <div class="spec-item">
+                                    <small>RANGE / MPG</small>
+                                    <strong style="font-size: 0.8rem;">${car.rangeOrMpg.split(' ')[0]}</strong>
+                                </div>
+                            </div>
+                            <div class="car-card-actions">
+                                <a href="car-details.html?id=${car.id}" class="btn">Configure & Buy</a>
+                                <a href="car-details.html?id=${car.id}#finance-section" class="btn btn-secondary">Financing</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        });
+    </script>
 </body>
 
 </html>

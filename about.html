@@ -4,35 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - VELOCITY BLACK</title>
+    <title>About Us - WHEELS</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="icon" type="image/x-icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
     <style>
         .page-header {
-            background: linear-gradient(135deg, rgba(13, 13, 13, 0.9) 0%, rgba(220, 20, 60, 0.7) 100%), url('https://images.unsplash.com/photo-1492144534655-ae79c2c03457?w=1920&h=600&fit=crop') center/cover;
-            padding: 150px 2rem 80px;
+            background: linear-gradient(135deg, rgba(13, 13, 13, 0.95) 0%, rgba(37, 99, 235, 0.75) 100%), url('https://images.unsplash.com/photo-1492144534655-ae79c2c03457?w=1920&fit=crop') center/cover;
+            padding: 140px 2rem 60px;
             text-align: center;
-            margin-top: 70px;
         }
 
         .stat-card {
+            background: var(--subtle);
+            border: 1px solid var(--extra);
+            border-radius: 14px;
             text-align: center;
-            padding: 2rem;
+            padding: 2.2rem 1.5rem;
         }
 
         .stat-number {
             font-family: var(--font-heading);
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--secondary);
             font-weight: 900;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
         }
 
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 2rem;
         }
 
@@ -41,43 +43,23 @@
             padding: 2rem;
             text-align: center;
             border: 1px solid var(--extra);
+            border-radius: 14px;
             transition: all 0.3s ease;
         }
 
         .team-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-6px);
             border-color: var(--secondary);
         }
 
         .team-avatar {
-            width: 150px;
-            height: 150px;
+            width: 110px;
+            height: 110px;
             border-radius: 50%;
-            background: var(--secondary);
-            margin: 0 auto 1.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--text);
-            font-weight: bold;
-        }
-
-        .certifications {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 3rem;
-            opacity: 0.8;
-        }
-
-        .cert-logo {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--accent);
-            padding: 1rem 2rem;
-            border: 2px solid var(--extra);
+            object-fit: cover;
+            border: 2px solid var(--secondary);
+            margin: 0 auto 1.2rem;
+            display: block;
         }
     </style>
 </head>
@@ -86,26 +68,17 @@
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="index.html" class="logo">VELOCITY BLACK</a>
+            <a href="index.html" class="logo">WHEELS</a>
             <ul class="nav-menu">
-                <li class="nav-dropdown">
-                    <a href="#" class="dropdown-toggle">Home <i class="fas fa-chevron-down"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Page</a></li>
-                        <li><a href="index2.html">Home Page 2</a></li>
-                    </ul>
-                </li>
-                <li><a href="fleet.html">Fleet</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="locations.html">Locations</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="fleet.html">New Inventory</a></li>
+                <li><a href="services.html">Services & Financing</a></li>
+                <li><a href="locations.html">Showrooms</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
             <div class="nav-icons">
-                <a href="dashboard.html" class="btn btn-secondary"
-                    style="padding: 10px 20px; font-size: 0.9rem;">Dashboard</a>
-                <a href="login.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 0.9rem;">Login</a>
-                <a href="register.html" class="btn" style="padding: 10px 20px; font-size: 0.9rem;">Register</a>
+                <!-- Injected via auth.js / main.js -->
             </div>
             <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
         </div>
@@ -113,288 +86,84 @@
 
     <!-- PAGE HEADER -->
     <section class="page-header">
-        <h1>About Us</h1>
-        <p style="font-size: 1.2rem; margin-top: 1rem;">Driving excellence since 2010</p>
-    </section>
-
-    <!-- COMPANY STORY -->
-    <section class="section">
-        <div class="grid grid-2">
-            <div>
-                <h2>Our Story</h2>
-                <p>Founded in 2010, VELOCITY BLACK began with a simple mission: to provide premium car rental services
-                    that combine luxury, reliability, and exceptional customer care. What started as a small fleet of
-                    high-end vehicles has grown into one of the most trusted names in the car rental industry.</p>
-                <p>Our commitment to excellence has earned us the trust of thousands of customers, from business
-                    travelers to families on vacation. We believe that every journey deserves the perfect vehicle, and
-                    we're here to make that happen.</p>
-            </div>
-            <div style="background: var(--subtle); padding: 2rem; border-left: 4px solid var(--secondary);">
-                <h3>Our Mission</h3>
-                <p>To provide exceptional car rental experiences through premium vehicles, outstanding service, and
-                    unwavering commitment to customer satisfaction.</p>
-                <h3 style="margin-top: 2rem;">Our Vision</h3>
-                <p>To become the leading premium car rental service globally, recognized for innovation, sustainability,
-                    and customer excellence.</p>
-            </div>
+        <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+            <h1 style="font-size: 2.8rem; margin-bottom: 0.5rem;">ABOUT WHEELS</h1>
+            <p style="color: var(--accent); max-width: 700px; margin: 0 auto; font-size: 1.05rem;">
+                Redefining the automotive acquisition experience with direct manufacturer allocation, digital configurators, and white-glove VIP delivery.
+            </p>
         </div>
     </section>
 
-    <!-- STATISTICS -->
-    <section class="section" style="background: var(--subtle);">
-        <div class="section-title">
-            <h2>By The Numbers</h2>
-        </div>
-        <div class="grid grid-4">
-            <div class="card stat-card">
-                <div class="stat-number counter" data-target="14" data-suffix="+">0</div>
-                <h3>Years in Business</h3>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-number counter" data-target="500" data-suffix="+">0</div>
-                <h3>Cars in Fleet</h3>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-number counter" data-target="50000" data-suffix="+">0</div>
-                <h3>Happy Customers</h3>
-            </div>
-            <div class="card stat-card">
-                <div class="stat-number counter" data-target="25" data-suffix="+">0</div>
-                <h3>Locations</h3>
+    <!-- STATS -->
+    <section class="section" style="padding: 60px 0; background: var(--primary);">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem;">
+                <div class="stat-card">
+                    <div class="stat-number">$140M+</div>
+                    <div style="font-family: var(--font-accent); color: #fff; text-transform: uppercase;">Delivered New Vehicles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">100%</div>
+                    <div style="font-family: var(--font-accent); color: #fff; text-transform: uppercase;">Transparent MSRP Guarantee</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4,800+</div>
+                    <div style="font-family: var(--font-accent); color: #fff; text-transform: uppercase;">VIP Test Drives Completed</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4.9★</div>
+                    <div style="font-family: var(--font-accent); color: #fff; text-transform: uppercase;">Client Satisfaction Rating</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- WHY CHOOSE US -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Why Choose Us</h2>
-        </div>
-        <div class="grid grid-3">
-            <div class="card">
-                <i class="fas fa-award" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Premium Quality</h3>
-                <p>Every vehicle in our fleet is meticulously maintained and regularly serviced to ensure the highest
-                    standards.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-headset" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>24/7 Support</h3>
-                <p>Our dedicated support team is available around the clock to assist you with any questions or
-                    concerns.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-shield-alt"
-                    style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Fully Insured</h3>
-                <p>Comprehensive insurance coverage included with every rental for your peace of mind.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-dollar-sign"
-                    style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Best Prices</h3>
-                <p>Competitive pricing with transparent fees. No hidden charges, guaranteed.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-clock" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Quick Service</h3>
-                <p>Fast and efficient booking process. Get on the road in minutes, not hours.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-leaf" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Eco-Friendly</h3>
-                <p>Growing fleet of hybrid and electric vehicles for environmentally conscious travelers.</p>
-            </div>
-            <div class="card">
-                <i class="fas fa-star" style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Customer Satisfaction</h3>
-                <p>Thousands of satisfied customers trust us for their transportation needs. Join our happy community.
-                </p>
-            </div>
-            <div class="card">
-                <i class="fas fa-map-marked-alt"
-                    style="font-size: 2.5rem; color: var(--secondary); margin-bottom: 1rem;"></i>
-                <h3>Multiple Locations</h3>
-                <p>Convenient pickup and drop-off locations across the city. Find us wherever you need us.</p>
-            </div>
-        </div>
-    </section>
+    <!-- LEADERSHIP TEAM -->
+    <section class="section" style="padding: 70px 0; background: var(--subtle);">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem;">
+            <h2 style="margin-bottom: 2.5rem;"><i class="fas fa-user-tie" style="color: var(--secondary);"></i> Executive Leadership</h2>
+            
+            <div class="team-grid">
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Alex Vance" class="team-avatar">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem;">Alex Vance</h3>
+                    <span style="color: var(--secondary); font-family: var(--font-accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; display: block; margin-bottom: 0.8rem;">Dealership Director</span>
+                    <p style="font-size: 0.85rem; color: var(--accent); margin: 0;">20+ years of performance automotive engineering and bespoke allocation oversight.</p>
+                </div>
 
-    <!-- OUR FLEET -->
-    <section class="section" style="background: var(--subtle);">
-        <div class="section-title">
-            <h2>Our Fleet</h2>
-        </div>
-        <div class="grid grid-2">
-            <div style="text-align: center;">
-                <h3 style="text-align: center;">Fleet Size & Variety</h3>
-                <p style="text-align: center;">With over 500 vehicles in our fleet, we offer an extensive selection
-                    across all categories:</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1rem; text-align: center;">
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Economy & Compact cars for budget-conscious
-                        travelers</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Sedans and SUVs for families and groups
-                    </li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Luxury vehicles for special occasions</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Sports cars for the ultimate driving
-                        experience</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Electric and hybrid options for
-                        eco-friendly travel</li>
-                </ul>
-            </div>
-            <div style="text-align: center;">
-                <h3 style="text-align: center;">Maintenance Standards</h3>
-                <p style="text-align: center;">Every vehicle undergoes rigorous inspection and maintenance:</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1rem; text-align: center;">
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Regular service intervals maintained</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Pre-rental safety inspections</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Clean and sanitized interiors</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Latest model year vehicles</li>
-                    <li style="margin-bottom: 0.8rem; text-align: center;">✓ Full maintenance history records</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="David Sterling" class="team-avatar">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem;">Julian Mercer</h3>
+                    <span style="color: var(--secondary); font-family: var(--font-accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; display: block; margin-bottom: 0.8rem;">Head of VIP Client Relations</span>
+                    <p style="font-size: 0.85rem; color: var(--accent); margin: 0;">Specializes in private track deliveries, factory build customization, and concierge logistics.</p>
+                </div>
 
-    <!-- TEAM SECTION -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Meet Our Team</h2>
-        </div>
-        <div class="team-grid">
-            <div class="team-card">
-                <div class="team-avatar">JD</div>
-                <h3>John Davis</h3>
-                <p style="color: var(--secondary); margin-bottom: 1rem;">CEO & Founder</p>
-                <p style="color: var(--accent); font-size: 0.9rem;">With over 20 years in the automotive industry, John
-                    founded VELOCITY BLACK with a vision to revolutionize car rentals.</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">SM</div>
-                <h3>Sarah Martinez</h3>
-                <p style="color: var(--secondary); margin-bottom: 1rem;">Operations Director</p>
-                <p style="color: var(--accent); font-size: 0.9rem;">Sarah ensures our fleet operations run smoothly and
-                    efficiently, maintaining our high service standards.</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">MJ</div>
-                <h3>Michael Johnson</h3>
-                <p style="color: var(--secondary); margin-bottom: 1rem;">Customer Success Manager</p>
-                <p style="color: var(--accent); font-size: 0.9rem;">Michael leads our customer service team, ensuring
-                    every client receives exceptional support.</p>
-            </div>
-            <div class="team-card">
-                <div class="team-avatar">EW</div>
-                <h3>Emily Wilson</h3>
-                <p style="color: var(--secondary); margin-bottom: 1rem;">Fleet Manager</p>
-                <p style="color: var(--accent); font-size: 0.9rem;">Emily oversees vehicle maintenance and fleet
-                    expansion, keeping our cars in perfect condition.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- CERTIFICATIONS & AWARDS -->
-    <section class="section" style="background: var(--subtle);">
-        <div class="section-title">
-            <h2>Certifications & Awards</h2>
-        </div>
-        <div class="certifications">
-            <div class="cert-logo">ISO 9001</div>
-            <div class="cert-logo">AAA Certified</div>
-            <div class="cert-logo">Best Service 2023</div>
-            <div class="cert-logo">Customer Choice</div>
-        </div>
-        <p style="text-align: center; margin-top: 2rem; color: var(--accent);">Recognized for excellence in customer
-            service and fleet management</p>
-    </section>
-
-    <!-- SUSTAINABILITY -->
-    <section class="section">
-        <div class="section-title">
-            <h2>Sustainability & Responsibility</h2>
-        </div>
-        <div class="grid grid-2">
-            <div class="card">
-                <h3><i class="fas fa-leaf" style="color: var(--secondary); margin-right: 0.5rem;"></i>Green Initiatives
-                </h3>
-                <p>We're committed to reducing our environmental impact through:</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1rem;">
-                    <li style="margin-bottom: 0.8rem;">✓ Expanding our hybrid and electric vehicle fleet</li>
-                    <li style="margin-bottom: 0.8rem;">✓ Carbon offset programs</li>
-                    <li style="margin-bottom: 0.8rem;">✓ Sustainable office practices</li>
-                    <li style="margin-bottom: 0.8rem;">✓ Recycling and waste reduction</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3><i class="fas fa-handshake" style="color: var(--secondary); margin-right: 0.5rem;"></i>Corporate
-                    Responsibility</h3>
-                <p>We believe in giving back to our community:</p>
-                <ul style="list-style: none; padding: 0; margin-top: 1rem;">
-                    <li style="margin-bottom: 0.8rem;">✓ Local charity partnerships</li>
-                    <li style="margin-bottom: 0.8rem;">✓ Employee volunteer programs</li>
-                    <li style="margin-bottom: 0.8rem;">✓ Supporting local businesses</li>
-                    <li style="margin-bottom: 0.8rem;">✓ Educational initiatives</li>
-                </ul>
+                <div class="team-card">
+                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Elena Rostova" class="team-avatar">
+                    <h3 style="font-size: 1.2rem; margin-bottom: 0.2rem;">Sophia Sterling</h3>
+                    <span style="color: var(--secondary); font-family: var(--font-accent); font-weight: 700; font-size: 0.85rem; text-transform: uppercase; display: block; margin-bottom: 0.8rem;">Financial Services Director</span>
+                    <p style="font-size: 0.85rem; color: var(--accent); margin: 0;">Oversees institutional lease underwriting, 0% APR programs, and custom acquisition structures.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FOOTER -->
-    <footer class="footer carbon-fiber">
-        <div class="footer-content">
-            <div class="footer-section">
-                <a href="index.html" class="logo">VELOCITY BLACK</a>
-                <p>Premium car rental service for your every journey. Experience luxury, reliability, and exceptional
-                    service.</p>
-                <div class="footer-social">
-                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                </div>
+    <footer class="footer" style="padding: 60px 0 30px; background: #08080a; border-top: 1px solid var(--extra);">
+        <div class="container" style="max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; text-align: center;">
+            <a href="index.html" class="logo" style="font-size: 1.5rem; display: inline-block; margin-bottom: 1rem;">WHEELS</a>
+            <p style="color: var(--accent); font-size: 0.9rem; max-width: 600px; margin: 0 auto 1.5rem;">
+                Official Authorized Showroom for Brand New Luxury & High-Performance Vehicles.
+            </p>
+            <div style="color: var(--accent); font-size: 0.8rem;">
+                © 2026 WHEELS LLC. All rights reserved.
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Our Fleet</a></li>
-                    <li><a href="services.html">Services</a></li>
-                    <li><a href="locations.html">Locations</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Car Categories</h3>
-                <ul>
-                    <li><a href="fleet.html">Economy</a></li>
-                    <li><a href="fleet.html">Compact</a></li>
-                    <li><a href="fleet.html">Sedan</a></li>
-                    <li><a href="fleet.html">SUV</a></li>
-                    <li><a href="fleet.html">Luxury</a></li>
-                    <li><a href="fleet.html">Sports</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <ul>
-                    <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
-                    <li><i class="fas fa-envelope"></i> info@velocityblack.com</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Speed Avenue, City, State 12345</li>
-                    <li><i class="fas fa-clock"></i> Open 24/7</li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 VELOCITY BLACK. All rights reserved. | <a href="#" style="color: var(--accent);">Privacy
-                    Policy</a> | <a href="#" style="color: var(--accent);">Terms of Service</a></p>
         </div>
     </footer>
 
-    <button class="back-to-top" aria-label="Back to Top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
+    <!-- SCRIPTS -->
+    <script src="js/car-db.js"></script>
+    <script src="js/auth.js"></script>
     <script src="js/main.js"></script>
 </body>
 
