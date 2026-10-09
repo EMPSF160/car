@@ -73,13 +73,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const currentCity = getSelectedCity();
 
     let authHtml = `
-      <!-- Location Selector Pill -->
-      <button type="button" class="nav-location-pill trigger-city-modal" title="Change City / Showroom Location">
-        <i class="fas fa-map-marker-alt"></i>
-        <span class="selected-city-label">${currentCity}</span>
-        <i class="fas fa-chevron-down"></i>
-      </button>
-
       <button class="theme-toggle" aria-label="Toggle theme" title="Toggle Light/Dark Theme">
         <i class="fas ${document.body.classList.contains('light-theme') ? 'fa-moon' : 'fa-sun'}"></i>
       </button>
@@ -99,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
       authHtml += `
         <div class="nav-user-dropdown">
           <button class="nav-user-btn">
-            <img src="${user.avatar}" alt="${user.name}" class="nav-avatar">
+            <img src="${user.avatar || 'data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%232563eb\'/%3E%3Ccircle cx=\'50\' cy=\'38\' r=\'18\' fill=\'%23ffffff\'/%3E%3Cpath d=\'M20 86c0-16.5 13.5-30 30-30s30 13.5 30 30z\' fill=\'%23ffffff\'/%3E%3C/svg%3E'}" alt="${user.name}" class="nav-avatar" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%232563eb\'/%3E%3Ccircle cx=\'50\' cy=\'38\' r=\'18\' fill=\'%23ffffff\'/%3E%3Cpath d=\'M20 86c0-16.5 13.5-30 30-30s30 13.5 30 30z\' fill=\'%23ffffff\'/%3E%3C/svg%3E'">
             <span class="nav-user-name">${user.name.split(' ')[0]}</span>
             <span class="badge-role ${user.role}">${user.role.toUpperCase()}</span>
             <i class="fas fa-chevron-down"></i>

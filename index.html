@@ -12,70 +12,66 @@
 </head>
 
 <body>
-    <!-- TOP UTILITY BAR -->
-    <div class="top-utility-bar">
-        <div class="utility-container">
-            <div class="utility-left">
-                <a href="javascript:void(0)" class="utility-link trigger-city-modal" title="Change Location">
-                    <i class="fas fa-map-marker-alt" style="color: #38bdf8;"></i>
-                    <span>Select City: <strong id="topbar-city" style="color: #ffffff;">Mumbai</strong></span>
-                    <i class="fas fa-chevron-down" style="font-size: 0.65rem;"></i>
-                </a>
-            </div>
-            <div class="utility-right">
-                <a href="contact.html" class="utility-link">
-                    <i class="fas fa-phone-alt"></i> Request a callback
-                </a>
-                <a href="dashboard.html" class="utility-link highlight">
-                    <i class="fas fa-external-link-alt"></i> Dealer CRM / Portal
-                </a>
+    <!-- HEADER (STICKY TO VIEWPORT) -->
+    <header class="site-header">
+        <!-- TOP UTILITY BAR -->
+        <div class="top-utility-bar">
+            <div class="utility-container">
+                <div class="utility-left">
+                    <a href="javascript:void(0)" class="utility-link trigger-city-modal" title="Change Location">
+                        <i class="fas fa-map-marker-alt" style="color: #38bdf8;"></i>
+                        <span>Select City: <strong id="topbar-city" style="color: #ffffff;">Mumbai</strong></span>
+                        <i class="fas fa-chevron-down" style="font-size: 0.65rem;"></i>
+                    </a>
+                </div>
+                <div class="utility-right">
+                    <a href="contact.html" class="utility-link">
+                        <i class="fas fa-phone-alt"></i> Request a callback
+                    </a>
+                    <a href="dashboard.html" class="utility-link highlight">
+                        <i class="fas fa-external-link-alt"></i> Dealer CRM / Portal
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- MAIN NAVBAR -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <!-- Brand Logo -->
-            <a href="index.html" class="logo">WHEELS</a>
+        <!-- MAIN NAVBAR -->
+        <nav class="navbar">
+            <div class="navbar-container">
+                <!-- Brand Logo -->
+                <a href="index.html" class="logo">WHEELS</a>
 
-            <!-- Center Search Bar -->
-            <div class="nav-center-search">
-                <i class="fas fa-search" style="color: var(--accent); font-size: 0.9rem;"></i>
-                <input type="text" id="top-nav-search-input" placeholder="Search cars by brand, model, price...">
-                <button type="button" class="nav-search-btn" id="top-nav-search-btn">Search</button>
+                <!-- Right Nav Icons / Auth -->
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="fleet.html">New Inventory</a></li>
+                    <li><a href="services.html">Services & Financing</a></li>
+                    <li><a href="locations.html">Showrooms</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                </ul>
+
+                <div class="nav-icons">
+                    <!-- Dynamically Injected via auth.js / main.js -->
+                </div>
+
+                <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
             </div>
+        </nav>
 
-            <!-- Right Nav Icons / Auth -->
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="fleet.html">New Inventory</a></li>
-                <li><a href="services.html">Services & Financing</a></li>
-                <li><a href="locations.html">Showrooms</a></li>
-                <li><a href="about.html">About</a></li>
+        <!-- SUB-NAVBAR LINKS BAR -->
+        <div class="subnav-bar">
+            <ul class="subnav-links">
+                <li><a href="fleet.html" class="active">Buy New Car</a></li>
+                <li><a href="fleet.html">Explore Showroom</a></li>
+                <li><a href="car-details.html?id=car-taycan-gt-2026#finance-section">Car Finance & EMI</a></li>
+                <li><a href="services.html">Trade-In & Valuation</a></li>
+                <li><a href="locations.html">Showrooms & Test Drive</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="dashboard.html">Dashboard / Garage</a></li>
             </ul>
-
-            <div class="nav-icons">
-                <!-- Dynamically Injected via auth.js / main.js -->
-            </div>
-
-            <button class="mobile-menu-toggle" aria-label="Toggle Menu">☰</button>
         </div>
-    </nav>
-
-    <!-- SUB-NAVBAR LINKS BAR -->
-    <div class="subnav-bar">
-        <ul class="subnav-links">
-            <li><a href="fleet.html" class="active">Buy New Car</a></li>
-            <li><a href="fleet.html">Explore Showroom</a></li>
-            <li><a href="car-details.html?id=car-taycan-gt-2026#finance-section">Car Finance & EMI</a></li>
-            <li><a href="services.html">Trade-In & Valuation</a></li>
-            <li><a href="locations.html">Showrooms & Test Drive</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </div>
+    </header>
 
     <!-- SPLIT HERO SECTION -->
     <section class="hero-split-section">
