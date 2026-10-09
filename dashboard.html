@@ -366,28 +366,28 @@
             </div>
 
             <div class="sidebar-menu">
-                <button class="sidebar-menu-btn active" data-tab="tab-overview">
+                <button type="button" class="sidebar-menu-btn active" data-tab="tab-overview" id="nav-tab-overview">
                     <i class="fas fa-chart-pie"></i> Executive Overview
                 </button>
-                <button class="sidebar-menu-btn" data-tab="tab-inventory" id="nav-tab-inventory">
+                <button type="button" class="sidebar-menu-btn" data-tab="tab-inventory" id="nav-tab-inventory">
                     <i class="fas fa-car"></i> Vehicle Inventory (CRUD)
                 </button>
-                <button class="sidebar-menu-btn" data-tab="tab-testdrives">
+                <button type="button" class="sidebar-menu-btn" data-tab="tab-testdrives" id="nav-tab-testdrives">
                     <i class="fas fa-calendar-check"></i> Test Drive Bookings
                 </button>
-                <button class="sidebar-menu-btn" data-tab="tab-orders">
+                <button type="button" class="sidebar-menu-btn" data-tab="tab-orders" id="nav-tab-orders">
                     <i class="fas fa-shopping-bag"></i> Vehicle Orders & Reservations
                 </button>
-                <button class="sidebar-menu-btn" data-tab="tab-inquiries" id="nav-tab-inquiries">
+                <button type="button" class="sidebar-menu-btn" data-tab="tab-inquiries" id="nav-tab-inquiries">
                     <i class="fas fa-envelope-open-text"></i> Customer Leads
                 </button>
-                <button class="sidebar-menu-btn" data-tab="tab-mygarage" id="nav-tab-mygarage" style="display: none;">
+                <button type="button" class="sidebar-menu-btn" data-tab="tab-mygarage" id="nav-tab-mygarage">
                     <i class="fas fa-warehouse"></i> My Garage & Orders
                 </button>
 
                 <hr style="border: 0; border-top: 1px solid var(--extra); margin: 0.8rem 0;">
 
-                <a href="fleet.html" class="sidebar-menu-btn">
+                <a href="fleet.html" class="sidebar-menu-btn" id="nav-link-showroom">
                     <i class="fas fa-store"></i> View Showroom
                 </a>
                 <button type="button" class="sidebar-menu-btn" id="btn-switch-role-sidebar">
@@ -396,11 +396,19 @@
                 <button type="button" class="sidebar-menu-btn" id="btn-reset-db-sidebar" style="color: var(--accent);">
                     <i class="fas fa-undo"></i> Reset Demo Data
                 </button>
+                <button type="button" class="sidebar-menu-btn" id="btn-logout-sidebar" style="color: #ff4757; margin-top: auto;">
+                    <i class="fas fa-sign-out-alt" style="color: #ff4757;"></i> Sign Out / Logout
+                </button>
             </div>
         </aside>
 
         <!-- MAIN VIEW AREA -->
         <main class="admin-main">
+            <!-- Mobile Sidebar Toggle -->
+            <button type="button" class="admin-sidebar-mobile-toggle" id="btn-sidebar-mobile-toggle">
+                <i class="fas fa-bars"></i> Toggle Dashboard Navigation Menu
+            </button>
+
             <!-- Header -->
             <div class="admin-header">
                 <div>
@@ -408,10 +416,13 @@
                     <p style="color: var(--accent); margin: 0; font-size: 0.85rem;" id="view-subtitle">Real-time vehicle sales, test drive pipeline, and factory allocation tracker.</p>
                 </div>
 
-                <div style="display: flex; gap: 0.8rem;">
+                <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
                     <button class="btn" id="btn-add-vehicle-top">
                         <i class="fas fa-plus-circle"></i> Add New Vehicle
                     </button>
+                    <a href="fleet.html" class="btn btn-secondary" id="btn-customer-browse-top" style="display: none;">
+                        <i class="fas fa-car"></i> Browse New Cars
+                    </a>
                 </div>
             </div>
 
@@ -423,14 +434,14 @@
                         <div class="kpi-icon"><i class="fas fa-dollar-sign"></i></div>
                         <div>
                             <div class="kpi-value" id="kpi-sales-vol">$1,023,500</div>
-                            <div class="kpi-label">Total Reserve Volume</div>
+                            <div class="kpi-label" id="kpi-sales-label">Total Reserve Volume</div>
                         </div>
                     </div>
                     <div class="kpi-card">
                         <div class="kpi-icon" style="background: rgba(46, 213, 115, 0.12); color: #2ed573;"><i class="fas fa-car-side"></i></div>
                         <div>
                             <div class="kpi-value" id="kpi-cars-count">8</div>
-                            <div class="kpi-label">Units in Inventory</div>
+                            <div class="kpi-label" id="kpi-cars-label">Units in Inventory</div>
                         </div>
                     </div>
                     <div class="kpi-card">
@@ -449,12 +460,12 @@
                     </div>
                 </div>
 
-                <!-- Recent Activity Tables -->
-                <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 1.8rem;">
+                <!-- Admin Overview Tables -->
+                <div id="overview-admin-section" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 450px), 1fr)); gap: 1.8rem;">
                     <div class="data-table-card">
                         <div class="table-toolbar">
                             <h3><i class="fas fa-clock" style="color: var(--secondary);"></i> Recent Vehicle Reservations</h3>
-                            <button class="btn-table-sm" onclick="switchTab('tab-orders')">View All</button>
+                            <button type="button" class="btn-table-sm" onclick="switchTab('tab-orders')">View All</button>
                         </div>
                         <div style="overflow-x: auto;">
                             <table class="admin-table" id="overview-orders-table">
@@ -477,7 +488,7 @@
                     <div class="data-table-card">
                         <div class="table-toolbar">
                             <h3><i class="fas fa-calendar-check" style="color: var(--secondary);"></i> Upcoming Test Drives</h3>
-                            <button class="btn-table-sm" onclick="switchTab('tab-testdrives')">Manage</button>
+                            <button type="button" class="btn-table-sm" onclick="switchTab('tab-testdrives')">Manage</button>
                         </div>
                         <div style="overflow-x: auto;">
                             <table class="admin-table" id="overview-td-table">
@@ -493,6 +504,30 @@
                                     <!-- Injected -->
                                 </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customer Overview Section -->
+                <div id="overview-customer-section" style="display: none;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+                        <div class="card" style="padding: 1.5rem; text-align: left;">
+                            <i class="fas fa-car" style="font-size: 2rem; color: var(--secondary); margin-bottom: 0.8rem;"></i>
+                            <h3 style="font-size: 1.15rem; text-align: left; margin-bottom: 0.3rem;">Explore 2026 Inventory</h3>
+                            <p style="color: var(--accent); font-size: 0.85rem; text-align: left; margin-bottom: 1rem;">Browse factory allocations, Porsche, Mercedes-AMG, and Ferrari new models.</p>
+                            <a href="fleet.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; align-self: flex-start;">View Showroom</a>
+                        </div>
+                        <div class="card" style="padding: 1.5rem; text-align: left;">
+                            <i class="fas fa-calendar-check" style="font-size: 2rem; color: #2ed573; margin-bottom: 0.8rem;"></i>
+                            <h3 style="font-size: 1.15rem; text-align: left; margin-bottom: 0.3rem;">Book VIP Doorstep Drive</h3>
+                            <p style="color: var(--accent); font-size: 0.85rem; text-align: left; margin-bottom: 1rem;">Complimentary track delivery or doorstep inspection with certified specialists.</p>
+                            <a href="locations.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; align-self: flex-start;">Find Showroom</a>
+                        </div>
+                        <div class="card" style="padding: 1.5rem; text-align: left;">
+                            <i class="fas fa-exchange-alt" style="font-size: 2rem; color: #1e90ff; margin-bottom: 0.8rem;"></i>
+                            <h3 style="font-size: 1.15rem; text-align: left; margin-bottom: 0.3rem;">Valuation & Trade-In</h3>
+                            <p style="color: var(--accent); font-size: 0.85rem; text-align: left; margin-bottom: 1rem;">Get an instant competitive trade-in valuation on your exotic vehicle.</p>
+                            <a href="contact.html" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem; align-self: flex-start;">Request Valuation</a>
                         </div>
                     </div>
                 </div>
@@ -527,7 +562,8 @@
 
             <!-- TAB 3: TEST DRIVE BOOKINGS -->
             <div class="tab-pane" id="tab-testdrives">
-                <div class="data-table-card">
+                <!-- Admin Table View -->
+                <div class="data-table-card" id="testdrives-admin-table-box">
                     <div class="table-toolbar">
                         <h3><i class="fas fa-calendar-alt" style="color: var(--secondary);"></i> Test Drive Appointments</h3>
                     </div>
@@ -550,11 +586,23 @@
                         </table>
                     </div>
                 </div>
+
+                <!-- Customer Test Drives View -->
+                <div id="testdrives-customer-box" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <h3 style="text-align: left; margin: 0;"><i class="fas fa-calendar-check" style="color: var(--secondary);"></i> My Scheduled Test Drives</h3>
+                        <a href="fleet.html" class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.85rem;"><i class="fas fa-plus"></i> Schedule Another Drive</a>
+                    </div>
+                    <div id="customer-testdrives-pane-container">
+                        <!-- Injected -->
+                    </div>
+                </div>
             </div>
 
             <!-- TAB 4: ORDERS & RESERVATIONS -->
             <div class="tab-pane" id="tab-orders">
-                <div class="data-table-card">
+                <!-- Admin Table View -->
+                <div class="data-table-card" id="orders-admin-table-box">
                     <div class="table-toolbar">
                         <h3><i class="fas fa-file-invoice-dollar" style="color: var(--secondary);"></i> Factory Reservations & Orders</h3>
                     </div>
@@ -574,6 +622,17 @@
                                 <!-- Injected -->
                             </tbody>
                         </table>
+                    </div>
+                </div>
+
+                <!-- Customer Orders View -->
+                <div id="orders-customer-box" style="display: none;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 1rem;">
+                        <h3 style="text-align: left; margin: 0;"><i class="fas fa-shield-alt" style="color: var(--secondary);"></i> My Factory Build Allocations</h3>
+                        <a href="fleet.html" class="btn" style="padding: 8px 18px; font-size: 0.85rem;"><i class="fas fa-plus"></i> Reserve New Build</a>
+                    </div>
+                    <div id="customer-orders-pane-container">
+                        <!-- Injected -->
                     </div>
                 </div>
             </div>
@@ -629,14 +688,14 @@
                 <form id="vehicle-crud-form">
                     <input type="hidden" id="crud-car-id">
                     
-                    <div style="display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 1rem; margin-bottom: 1rem;">
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Model Name</label>
-                            <input type="text" id="crud-name" required placeholder="e.g. Porsche 911 GT3 RS" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="text" id="crud-name" required placeholder="e.g. Porsche 911 GT3 RS" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Brand</label>
-                            <select id="crud-brand" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <select id="crud-brand" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                                 <option value="Porsche">Porsche</option>
                                 <option value="Mercedes-AMG">Mercedes-AMG</option>
                                 <option value="Ferrari">Ferrari</option>
@@ -649,18 +708,18 @@
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Year</label>
-                            <input type="number" id="crud-year" value="2026" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="number" id="crud-year" value="2026" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 1rem; margin-bottom: 1rem;">
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">MSRP Price ($ USD)</label>
-                            <input type="number" id="crud-price" required placeholder="220000" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="number" id="crud-price" required placeholder="220000" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Body Style</label>
-                            <select id="crud-body" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <select id="crud-body" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                                 <option value="Coupe">Coupe</option>
                                 <option value="Sedan">Sedan</option>
                                 <option value="SUV">SUV</option>
@@ -668,7 +727,7 @@
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Fuel / Powertrain</label>
-                            <select id="crud-fuel" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <select id="crud-fuel" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                                 <option value="Electric">Electric (EV)</option>
                                 <option value="Plug-in Hybrid">Plug-in Hybrid</option>
                                 <option value="Twin-Turbo Petrol">Twin-Turbo Petrol</option>
@@ -676,33 +735,33 @@
                         </div>
                     </div>
 
-                    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 1rem; margin-bottom: 1rem;">
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Horsepower (HP)</label>
-                            <input type="number" id="crud-hp" required placeholder="800" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="number" id="crud-hp" required placeholder="800" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">0-60 Time</label>
-                            <input type="text" id="crud-acc" required placeholder="2.5s" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="text" id="crud-acc" required placeholder="2.5s" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Top Speed</label>
-                            <input type="text" id="crud-speed" required placeholder="195 mph" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="text" id="crud-speed" required placeholder="195 mph" style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                         <div class="form-group">
                             <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">In Stock Count</label>
-                            <input type="number" id="crud-stock" value="3" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                            <input type="number" id="crud-stock" value="3" required style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                         </div>
                     </div>
 
                     <div class="form-group" style="margin-bottom: 1rem;">
                         <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Image URL (High-Res Render)</label>
-                        <input type="url" id="crud-image" required placeholder="https://images.unsplash.com/..." style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;">
+                        <input type="url" id="crud-image" required placeholder="https://images.unsplash.com/..." style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;">
                     </div>
 
                     <div class="form-group" style="margin-bottom: 1.5rem;">
                         <label style="font-size: 0.85rem; color: var(--accent); display: block; margin-bottom: 4px;">Overview & Engineering Highlights</label>
-                        <textarea id="crud-overview" rows="3" required placeholder="Describe vehicle powertrain and features..." style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff;"></textarea>
+                        <textarea id="crud-overview" rows="3" required placeholder="Describe vehicle powertrain and features..." style="width: 100%; padding: 10px; background: var(--primary); border: 1px solid var(--extra); color: #fff; border-radius: 8px;"></textarea>
                     </div>
 
                     <div style="display: flex; justify-content: flex-end; gap: 1rem;">
@@ -730,17 +789,46 @@
             document.getElementById('portal-role-pill').textContent = isAdmin ? 'DEALERSHIP ADMIN' : 'VIP CUSTOMER GARAGE';
             document.getElementById('portal-role-pill').className = `badge-role ${user.role}`;
 
+            // Mobile Sidebar Toggle Listener
+            const mobileToggle = document.getElementById('btn-sidebar-mobile-toggle');
+            const adminSidebar = document.querySelector('.admin-sidebar');
+            if (mobileToggle && adminSidebar) {
+                mobileToggle.addEventListener('click', () => {
+                    adminSidebar.classList.toggle('collapsed');
+                });
+            }
+
             if (!isAdmin) {
                 // Adjust views for customer
                 document.getElementById('nav-tab-inventory').style.display = 'none';
                 document.getElementById('nav-tab-inquiries').style.display = 'none';
-                document.getElementById('nav-tab-mygarage').style.display = 'flex';
                 document.getElementById('btn-add-vehicle-top').style.display = 'none';
-                switchTab('tab-mygarage');
+                document.getElementById('btn-customer-browse-top').style.display = 'inline-flex';
+                
+                // Adjust overview
+                document.getElementById('overview-admin-section').style.display = 'none';
+                document.getElementById('overview-customer-section').style.display = 'block';
+                document.getElementById('kpi-sales-label').textContent = 'My Total Portfolio Value';
+                document.getElementById('kpi-cars-label').textContent = 'Saved In Wishlist';
+
+                // Adjust test drives tab
+                document.getElementById('testdrives-admin-table-box').style.display = 'none';
+                document.getElementById('testdrives-customer-box').style.display = 'block';
+
+                // Adjust orders tab
+                document.getElementById('orders-admin-table-box').style.display = 'none';
+                document.getElementById('orders-customer-box').style.display = 'block';
             }
 
             // Tab Switching
             window.switchTab = function(tabId) {
+                if (!tabId) tabId = isAdmin ? 'tab-overview' : 'tab-mygarage';
+                
+                // If customer tries to access hidden admin tabs, redirect to overview
+                if (!isAdmin && (tabId === 'tab-inventory' || tabId === 'tab-inquiries')) {
+                    tabId = 'tab-overview';
+                }
+
                 document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
                 document.querySelectorAll('.sidebar-menu-btn').forEach(b => b.classList.remove('active'));
 
@@ -750,24 +838,60 @@
                 if (targetBtn) targetBtn.classList.add('active');
 
                 if (tabId === 'tab-overview') {
-                    document.getElementById('view-title').textContent = 'Dealership Management Console';
+                    document.getElementById('view-title').textContent = isAdmin ? 'Dealership Management Console' : 'VIP Customer Overview';
+                    document.getElementById('view-subtitle').textContent = isAdmin ? 'Real-time vehicle sales, test drive pipeline, and factory allocation tracker.' : 'Manage your bespoke factory orders, track VIP test drive schedules, and view inventory.';
                 } else if (tabId === 'tab-inventory') {
                     document.getElementById('view-title').textContent = 'Vehicle Inventory CRUD';
+                    document.getElementById('view-subtitle').textContent = 'Create, update, and manage showroom vehicle specifications and MSRP rates.';
                 } else if (tabId === 'tab-testdrives') {
-                    document.getElementById('view-title').textContent = 'VIP Test Drive Bookings';
+                    document.getElementById('view-title').textContent = isAdmin ? 'VIP Test Drive Bookings' : 'My VIP Test Drive Bookings';
+                    document.getElementById('view-subtitle').textContent = isAdmin ? 'Confirm, reschedule, and manage client test drive schedules.' : 'View status and locations of your scheduled private test drives.';
                 } else if (tabId === 'tab-orders') {
-                    document.getElementById('view-title').textContent = 'Vehicle Orders & Allocation';
+                    document.getElementById('view-title').textContent = isAdmin ? 'Vehicle Orders & Allocation' : 'My Factory Orders & Allocation';
+                    document.getElementById('view-subtitle').textContent = isAdmin ? 'Update factory build progression stages and deposit tracking.' : 'Track your bespoke vehicle build stages from chassis allocation to doorstep handover.';
+                } else if (tabId === 'tab-inquiries') {
+                    document.getElementById('view-title').textContent = 'Customer Leads & Valuation Requests';
+                    document.getElementById('view-subtitle').textContent = 'Review incoming sales requests, trade-in vehicle specs, and customer messages.';
                 } else if (tabId === 'tab-mygarage') {
                     document.getElementById('view-title').textContent = 'My Garage & Order Tracker';
+                    document.getElementById('view-subtitle').textContent = 'All your reserved vehicles, test drives, and saved configurations.';
                 }
+
+                try {
+                    history.replaceState(null, null, '#' + tabId);
+                } catch(e) {}
             };
 
             document.querySelectorAll('.sidebar-menu-btn[data-tab]').forEach(btn => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
                     const tabId = btn.getAttribute('data-tab');
                     switchTab(tabId);
                 });
             });
+
+            // Initial hash tab check
+            const hash = window.location.hash ? window.location.hash.replace('#', '') : null;
+            if (hash && document.getElementById(hash)) {
+                switchTab(hash);
+            } else {
+                switchTab(isAdmin ? 'tab-overview' : 'tab-mygarage');
+            }
+
+            // Logout Listener (Requirement 8)
+            const logoutBtn = document.getElementById('btn-logout-sidebar');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (confirm('Are you sure you want to sign out of your WHEELS account?')) {
+                        window.authManager.logout();
+                        showToast('Successfully signed out', 'info');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 400);
+                    }
+                });
+            }
 
             // Populate Tables & UI
             function refreshAllData() {
@@ -913,64 +1037,64 @@
             }
 
             function renderCustomerGarage(orders, testDrives) {
-                const myOrders = orders; // Show user orders
-                const ordersBox = document.getElementById('customer-orders-container');
-                if (myOrders.length === 0) {
-                    ordersBox.innerHTML = `
-                        <div class="customer-order-card" style="text-align: center;">
-                            <i class="fas fa-car" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 0.8rem;"></i>
-                            <p>You haven't reserved any vehicles yet.</p>
-                            <a href="fleet.html" class="btn" style="margin-top: 0.5rem; display: inline-block;">Browse Showroom</a>
-                        </div>
-                    `;
-                } else {
-                    ordersBox.innerHTML = myOrders.map(o => `
-                        <div class="customer-order-card">
-                            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--extra); padding-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
-                                <div>
-                                    <h4 style="margin: 0; font-size: 1.2rem;">${o.carName}</h4>
-                                    <small style="color: var(--accent);">Order ID: ${o.id} · Reserved on ${o.orderDate}</small>
-                                </div>
-                                <div style="text-align: right;">
-                                    <div style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--secondary);">$${o.totalPrice.toLocaleString()}</div>
-                                    <span class="badge-stock">Deposit Confirmed ($1,000)</span>
-                                </div>
+                // Customer Orders
+                const ordersHtml = (myOrders.length === 0) ? `
+                    <div class="customer-order-card" style="text-align: center;">
+                        <i class="fas fa-car" style="font-size: 2.5rem; color: var(--accent); margin-bottom: 0.8rem;"></i>
+                        <p>You haven't reserved any vehicles yet.</p>
+                        <a href="fleet.html" class="btn" style="margin-top: 0.5rem; display: inline-block;">Browse Showroom</a>
+                    </div>
+                ` : myOrders.map(o => `
+                    <div class="customer-order-card">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--extra); padding-bottom: 1rem; flex-wrap: wrap; gap: 0.8rem;">
+                            <div>
+                                <h4 style="margin: 0; font-size: 1.2rem;">${o.carName}</h4>
+                                <small style="color: var(--accent);">Order ID: ${o.id} · Reserved on ${o.orderDate}</small>
                             </div>
+                            <div style="text-align: right;">
+                                <div style="font-family: var(--font-heading); font-size: 1.3rem; color: var(--secondary);">$${o.totalPrice.toLocaleString()}</div>
+                                <span class="badge-stock">Deposit Confirmed ($1,000)</span>
+                            </div>
+                        </div>
 
-                            <div class="customer-timeline-steps">
-                                <div class="timeline-step-item completed">
-                                    <div class="step-icon"><i class="fas fa-check"></i></div>
-                                    <strong style="font-size: 0.8rem; display: block;">Deposit Paid</strong>
-                                    <small style="color: var(--accent); font-size: 0.7rem;">Verified</small>
-                                </div>
-                                <div class="timeline-step-item ${o.progressPercent >= 40 ? 'completed' : 'active'}">
-                                    <div class="step-icon"><i class="fas fa-cogs"></i></div>
-                                    <strong style="font-size: 0.8rem; display: block;">Factory Queued</strong>
-                                    <small style="color: var(--accent); font-size: 0.7rem;">Chassis Allocated</small>
-                                </div>
-                                <div class="timeline-step-item ${o.progressPercent >= 60 ? 'completed' : ''}">
-                                    <div class="step-icon"><i class="fas fa-wrench"></i></div>
-                                    <strong style="font-size: 0.8rem; display: block;">Assembly</strong>
-                                    <small style="color: var(--accent); font-size: 0.7rem;">Quality Control</small>
-                                </div>
-                                <div class="timeline-step-item ${o.progressPercent >= 80 ? 'completed' : ''}">
-                                    <div class="step-icon"><i class="fas fa-ship"></i></div>
-                                    <strong style="font-size: 0.8rem; display: block;">In Transit</strong>
-                                    <small style="color: var(--accent); font-size: 0.7rem;">Port / Dealer</small>
-                                </div>
-                                <div class="timeline-step-item ${o.progressPercent >= 100 ? 'completed' : ''}">
-                                    <div class="step-icon"><i class="fas fa-key"></i></div>
-                                    <strong style="font-size: 0.8rem; display: block;">VIP Delivery</strong>
-                                    <small style="color: var(--accent); font-size: 0.7rem;">Handover Ready</small>
-                                </div>
+                        <div class="customer-timeline-steps">
+                            <div class="timeline-step-item completed">
+                                <div class="step-icon"><i class="fas fa-check"></i></div>
+                                <strong style="font-size: 0.8rem; display: block;">Deposit Paid</strong>
+                                <small style="color: var(--accent); font-size: 0.7rem;">Verified</small>
+                            </div>
+                            <div class="timeline-step-item ${o.progressPercent >= 40 ? 'completed' : 'active'}">
+                                <div class="step-icon"><i class="fas fa-cogs"></i></div>
+                                <strong style="font-size: 0.8rem; display: block;">Factory Queued</strong>
+                                <small style="color: var(--accent); font-size: 0.7rem;">Chassis Allocated</small>
+                            </div>
+                            <div class="timeline-step-item ${o.progressPercent >= 60 ? 'completed' : ''}">
+                                <div class="step-icon"><i class="fas fa-wrench"></i></div>
+                                <strong style="font-size: 0.8rem; display: block;">Assembly</strong>
+                                <small style="color: var(--accent); font-size: 0.7rem;">Quality Control</small>
+                            </div>
+                            <div class="timeline-step-item ${o.progressPercent >= 80 ? 'completed' : ''}">
+                                <div class="step-icon"><i class="fas fa-ship"></i></div>
+                                <strong style="font-size: 0.8rem; display: block;">In Transit</strong>
+                                <small style="color: var(--accent); font-size: 0.7rem;">Port / Dealer</small>
+                            </div>
+                            <div class="timeline-step-item ${o.progressPercent >= 100 ? 'completed' : ''}">
+                                <div class="step-icon"><i class="fas fa-key"></i></div>
+                                <strong style="font-size: 0.8rem; display: block;">VIP Delivery</strong>
+                                <small style="color: var(--accent); font-size: 0.7rem;">Handover Ready</small>
                             </div>
                         </div>
-                    `).join('');
-                }
+                    </div>
+                `).join('');
+
+                const ordersBox = document.getElementById('customer-orders-container');
+                if (ordersBox) ordersBox.innerHTML = ordersHtml;
+
+                const ordersPaneBox = document.getElementById('customer-orders-pane-container');
+                if (ordersPaneBox) ordersPaneBox.innerHTML = ordersHtml;
 
                 // Customer Test Drives
-                const tdBox = document.getElementById('customer-testdrives-container');
-                tdBox.innerHTML = testDrives.map(td => `
+                const tdHtml = (testDrives.length === 0) ? '<div class="customer-order-card">No scheduled test drives yet.</div>' : testDrives.map(td => `
                     <div class="customer-order-card" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
                         <div>
                             <h4 style="margin: 0; font-size: 1.1rem;">${td.carName}</h4>
@@ -982,7 +1106,13 @@
                             <span class="badge-stock">${td.status}</span>
                         </div>
                     </div>
-                `).join('') || '<div class="customer-order-card">No scheduled test drives.</div>';
+                `).join('');
+
+                const tdBox = document.getElementById('customer-testdrives-container');
+                if (tdBox) tdBox.innerHTML = tdHtml;
+
+                const tdPaneBox = document.getElementById('customer-testdrives-pane-container');
+                if (tdPaneBox) tdPaneBox.innerHTML = tdHtml;
             }
 
             window.updateTD = function(id, status) {
@@ -1106,6 +1236,20 @@
                     refreshAllData();
                 }
             });
+
+            // Logout handler
+            const logoutBtn = document.getElementById('btn-logout-sidebar');
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    if (confirm('Are you sure you want to sign out?')) {
+                        window.authManager.logout();
+                        showToast('Signed out successfully', 'info');
+                        setTimeout(() => {
+                            window.location.href = 'index.html';
+                        }, 500);
+                    }
+                });
+            }
 
             window.addEventListener('wheels-db-updated', refreshAllData);
             refreshAllData();
